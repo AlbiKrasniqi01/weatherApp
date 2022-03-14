@@ -1,22 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Forecast from "./components/Forecast/Forecast";
+import React, {useState} from "react";
+function useWindowSize(){
+  const[size, setSize] = useState([window.innerHeight, window.innerWidth]);
+  return size
+}
 function App() {
+  const[height, width] = useWindowSize();
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Weather app GUI!!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Weather App</h1>
+        <main>
+          {/* Weather feteching component  */}
+        <Forecast/>
+      </main>
       </header>
     </div>
   );
