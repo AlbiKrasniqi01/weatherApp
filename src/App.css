@@ -1,7 +1,53 @@
+
 .App {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  margin:0;
   text-align: center;
+  background-color: #282c34;
+  background-image: url('/src/assets/windy2.jpeg');
+
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
+.fiveDayText {
+  color: black;
+}
+h1 {
+  font-size: 64px;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+h2 {
+  text-shadow: 1px 1px 3px #000000;
+
+}
+.photo {
+  height: 80px;
+  width: 80px;
+  -webkit-filter: drop-shadow(1px 1px 3px #000000);
+  filter: drop-shadow(1px 1px 3px #000000);}
+
+.refreshIcon {
+  height: 40px;
+  right: 0px;
+  position: absolute;
+}
+
+.bottomTab {
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  bottom: 0px;
+  background-color: white;
+  color: #282c34;
+  border-radius: 20px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -27,6 +73,13 @@
 
 .App-link {
   color: #61dafb;
+}
+
+button {
+  background-color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {
