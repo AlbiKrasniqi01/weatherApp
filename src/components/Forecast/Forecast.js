@@ -14,7 +14,6 @@ const Forecast = () => {
    function getForecast() {
 
       //weather data fetch function will go here
-      //fetch("https://community-open-weather-map.p.rapidapi.com/weather?q=London", {
       fetch("https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=London%2Cuk", {
       //fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${uriEncodedLocation}`, {
 	"method": "GET",
@@ -43,8 +42,10 @@ const Forecast = () => {
                {JSON.stringify(responseObj)}
            </div> */}
            <div>
-               <p>Button to prevent overloading API call limit</p>
-           <button onClick={getForecast}>Get Forecast</button>
+                 <Conditions
+               responseObj={responseObj}
+               />
+               <button onClick={getForecast}>Get Forecast</button>
            {/* <form onSubmit={getForecast}>
                 <input
                     type="text"
@@ -55,9 +56,7 @@ const Forecast = () => {
                     />
                 <button type="submit">Get Forecast</button>
             </form> */}
-           <Conditions
-               responseObj={responseObj}
-               />
+     
        </div>
        </div>
    )
