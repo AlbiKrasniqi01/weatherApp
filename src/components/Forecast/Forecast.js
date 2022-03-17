@@ -1,51 +1,66 @@
-import React, { useState } from 'react';
-import Conditions from '../Conditions/Conditions';
+import React, { useState } from 'react'
+import Conditions from '../Conditions/Conditions'
+import { IoMdRefresh } from 'react-icons/io'
 
 const Forecast = () => {
 
-    
-   let [city, setCity] = useState('');
+   const [city, setCity] = useState('');
+   const [country, setCountry] = useState('');
+   const [responseObj, setResponseObj] = useState({});
 
-   
-   const uriEncodedLocation =  encodeURIComponent(city);
+   const onSubmit = (e) => {
 
+       e.preventDefault()
 
-   let [responseObj, setResponseObj] = useState({});
-   function getForecast() {
+        if(!city){
+            alert('Please enter a location.')
+        }
+        else {
+            getForecast({city})
+        }
 
+    }
+
+   function getForecast({ city }) {
       //weather data fetch function will go here
-      //fetch("https://community-open-weather-map.p.rapidapi.com/weather?q=London", {
-      fetch("https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=London%2Cuk", {
-      //fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${uriEncodedLocation}`, {
+       //fetch("https://community-open-weather-map.p.rapidapi.com/find?q=london&cnt=5&type=like&units=metric", {
+      //fetch("https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=geneva%2Cswz", {
+      //fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${city}%2Cuk${country}`, {
+      fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${city}`, {
+      // fetch ("https://community-open-weather-map.p.rapidapi.com/weather?q=london&lang=en&units=metric", {
+
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "13f80ceb94msh62f26b55dc2eb41p1b5ecfjsnc82ae62ece3d"
+		"x-rapidapi-key": "97bd49d7c7msh76d11e9c9552604p131c5fjsnf16aadec91dc"
 	}
-})
+    })
 
     .then(response => response.json())
     .then(response => {
         setResponseObj(response)
     })
 
-    function getForecast(e) {
-        e.preventDefault();
     }
-    
-   }
+
+   function getCityForecast () {
+       getForecast({city})
+    }
+
 
    return (
-       // JSX code will go here
-       
-       <div>
-           {/* <div>
-               {JSON.stringify(responseObj)}
-           </div> */}
+
+       //<div>
+           //{/* <div>
+               //{JSON.stringify(responseObj)}
+           //</div> */}
            <div>
-               <p>Button to prevent overloading API call limit</p>
-           <button onClick={getForecast}>Get Forecast</button>
-           {/* <form onSubmit={getForecast}>
+            <IoMdRefresh className="refresh" onClick={getCityForecast} style = {{color:'white', cursor:'pointer'}}  />
+               <form className="searchBar"  onSubmit={onSubmit}>
+                   <input type = "search" id="input" placeholder='Search Cities' onChange={(e) => setCity(e.target.value)} />
+               </form>
+
+               {/* <form onSubmit={getForecast}>
                 <input
                     type="text"
                     placeholder="Enter Location"
@@ -59,8 +74,31 @@ const Forecast = () => {
                responseObj={responseObj}
                />
        </div>
-       </div>
    )
 }
 
-export default Forecast;
+export default Forecast
+
+
+// if (responseObj.count > 1) {
+//     console.log("hi")
+//     var select = document.getElementById("search");
+//     var options = ["1", "2", "3", "4", "5"];
+//     for(var i = 0; i<responseObj.cod ;i++) {
+//         var opt = options[i];
+//         var el = document.createElement("option");
+//         el.textContent = opt;
+//         el.value = opt;
+//         select.add(el);
+//     };
+//
+//
+//         <select id="search">
+//             <option>Choose a number</option>
+//         </select>
+
+
+// function getForecast(e) {
+//     e.preventDefault();
+// }
+
