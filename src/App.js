@@ -40,8 +40,9 @@ function App() {
   const size = useWindowSize();
   const current = new Date();  
   let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-  const date = `${months[current.getMonth()]} ${current.getDate()} `;
+  const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
   return (
     // <div className="App">
     //   <header className="App-header">
