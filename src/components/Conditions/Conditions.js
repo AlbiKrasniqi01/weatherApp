@@ -7,7 +7,6 @@ import snowicon from '../../assets/snowicon.png';
 
 
 const Conditions = ({ responseObj, mainCity }) => {
-    console.log(responseObj)
    return (       
        <div>
                <div>

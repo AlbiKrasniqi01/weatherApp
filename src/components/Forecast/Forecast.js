@@ -54,6 +54,7 @@ const Forecast = () => {
    const getForecast = async() => {
       //weather data fetch function will go here
      const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
+
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
@@ -76,7 +77,8 @@ const Forecast = () => {
                <div className="forecast">
                {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} /> : "No cities searched"}
                </div>
-       </div>
+
+          </div>
        </div>
    )
 }
