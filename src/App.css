@@ -9,6 +9,84 @@
   margin:0;
   text-align: center;
   background-color: #282c34;
+  background-image: url('/src/assets/windy2.jpeg');
+
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.fiveDayText {
+  color: black;
+}
+h1 {
+  font-size: 64px;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+h2 {
+  text-shadow: 1px 1px 3px #000000;
+
+}
+.photo {
+  height: 80px;
+  width: 80px;
+  -webkit-filter: drop-shadow(1px 1px 3px #000000);
+  filter: drop-shadow(1px 1px 3px #000000);}
+
+.refreshIcon {
+  height: 40px;
+  right: 0px;
+  position: absolute;
+}
+
+.bottomTab {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  bottom: 0px;
+  background-color: white;
+  color: #282c34;
+  border-radius: 20px;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  max-width: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+button {
+  background-color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
