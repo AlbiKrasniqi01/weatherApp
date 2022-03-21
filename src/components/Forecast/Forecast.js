@@ -58,7 +58,8 @@ const Forecast = () => {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "97bd49d7c7msh76d11e9c9552604p131c5fjsnf16aadec91dc"
+		// "x-rapidapi-key": "97bd49d7c7msh76d11e9c9552604p131c5fjsnf16aadec91dc"
+        "x-rapidapi-key": "13f80ceb94msh62f26b55dc2eb41p1b5ecfjsnc82ae62ece3d"
 	}
     })
     const data = await res.json()
