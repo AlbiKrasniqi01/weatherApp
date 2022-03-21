@@ -3,61 +3,82 @@ import Conditions from '../Conditions/Conditions';
 
 const Forecast = () => {
 
-    
-   let [city, setCity] = useState('');
-
-   
-   const uriEncodedLocation =  encodeURIComponent(city);
-
-
+   let [search, setSearch] = useState('');
+   let [mainCity, setMainCity] = useState('');
    let [responseObj, setResponseObj] = useState({});
-   function getForecast() {
 
+
+   const onSubmit = async(e) => {
+        e.preventDefault()
+
+        if(!search){
+            alert('Please enter a location.')
+        }
+        else {
+            var data = await getForecast({search})
+            setResponseObj(data)
+
+            if (data != null) {
+
+                var removeIt = document.getElementById('tempList');
+                if (removeIt != null) {
+                    removeIt.remove()
+                }
+
+                var t = document.createElement('ul');
+                t.setAttribute('id', 'tempList')
+
+                if (data.count > 1) {
+                    for (var i = 0; i < (data.count); i++) {
+                        var listOptions = document.createElement('li');
+                        listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
+                        listOptions.setAttribute('id', i)
+                        listOptions.addEventListener('click', clickList)
+                        t.appendChild(listOptions)
+                    }
+                    document.getElementById('wrapper').appendChild(t)
+                }
+            }
+        }
+   }
+
+    function clickList(e){
+        setMainCity(e.target.id)
+
+        var removeIt = document.getElementById('tempList');
+        if (removeIt != null) {
+            removeIt.remove()
+        }
+    }
+
+   const getForecast = async() => {
       //weather data fetch function will go here
-      fetch("https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=London%2Cuk", {
-      //fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${uriEncodedLocation}`, {
+     const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
+
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "13f80ceb94msh62f26b55dc2eb41p1b5ecfjsnc82ae62ece3d"
+		"x-rapidapi-key": "97bd49d7c7msh76d11e9c9552604p131c5fjsnf16aadec91dc"
 	}
-})
-
-    .then(response => response.json())
-    .then(response => {
-        setResponseObj(response)
     })
+    const data = await res.json()
 
-    function getForecast(e) {
-        e.preventDefault();
-    }
-    
+    return data
    }
 
-   return (
-       // JSX code will go here
-       
+       return (
        <div>
-           {/* <div>
-               {JSON.stringify(responseObj)}
-           </div> */}
            <div>
-                 <Conditions
-               responseObj={responseObj}
-               />
-               <button onClick={getForecast}>Get Forecast</button>
-           {/* <form onSubmit={getForecast}>
-                <input
-                    type="text"
-                    placeholder="Enter Location"
-                    maxLength="50"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    />
-                <button type="submit">Get Forecast</button>
-            </form> */}
-     
-       </div>
+               <form className="searchBar"  onSubmit={onSubmit}>
+                   <input type = "text" placeholder='Search Cities' className="searchInput" onChange={(e) => setSearch(e.target.value)} />
+                   <button type="submit" className="submit-button">Search</button>
+                   <div id="wrapper"></div>
+               </form>
+               <div className="forecast">
+               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} /> : "No cities searched"}
+               </div>
+
+          </div>
        </div>
    )
 }

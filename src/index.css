@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+form #wrapper{
+  text-align:left;
+  margin-left:43.5%;
+  margin-right:43.5%;
+
+}
+
+form #wrapper #tempList {
+  padding-left:5px;
+}
+
+ul {
+  margin-top:0;
+  list-style:none;
+  background-color: #282c34;
+}
+
+form .submit-button {
+  padding: 3px;
+  border-radius: 2px;
+  color:white;
+  background-color: lightblue;
+}
+
+.searchInput {
+  padding:3px;
+}
+
+li{
+  cursor:pointer;
+  margin-left:0;
+  font-size:0.8em;
+}
+
+li:hover {
+  color:grey;
+}

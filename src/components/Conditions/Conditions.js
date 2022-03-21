@@ -6,26 +6,17 @@ import windyicon from '../../assets/windyicon.png';
 import snowicon from '../../assets/snowicon.png'; 
 
 
-const Conditions = (props) => {
-
+const Conditions = ({ responseObj, mainCity }) => {
    return (       
        <div>
-           {props.responseObj.cod === 200 ?
-               <div>                   
-
-                   <h2>{props.responseObj.name}</h2>
-                   <h1>{Math.round(props.responseObj.main.temp)}°C </h1>
-
-
-
+               <div>
+                   <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
+                   <h1>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
                    <img className="photo" src={windyicon} />
-                   <h2>{(props.responseObj.weather[0].description)}</h2>
-                   {/* <p>It is currently {Math.round(props.responseObj.main.temp)} degrees out with {props.responseObj.weather[0].description}.</p> */}
+                   <h2>{responseObj.list[mainCity].description}</h2>
                </div>
-           : null
-           }
        </div>
    )
 }
 
-export default Conditions;
+export default Conditions

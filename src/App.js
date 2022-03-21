@@ -44,16 +44,6 @@ function App() {
 
   const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <h3>Weather App</h3>
-    //     <h4> {date} </h4>
-    //     <main>
-    //       {/* Weather feteching component  */}
-    //     <Forecast/>
-    //   </main>
-    //   </header>
-    // </div>
 
     <div className="body">
     <div width={size.height} className="App">
@@ -63,7 +53,8 @@ function App() {
         <h2>{date}</h2>
           {/* Weather fetching component  */}
         <Forecast>
-          </Forecast>
+        </Forecast>
+
 
     <div className='bottomTab'>
       <h2>Overview</h2>
