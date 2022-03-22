@@ -123,7 +123,6 @@ const [buttonPopup, setButtonPopup] = useState(false);
             <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
             <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
               <h2 className='dateText'>{date}</h2>
-            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
 
             {/* Weather fetching component */}
             <Forecast changeBackground = {changeBackground} />

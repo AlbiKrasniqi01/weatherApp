@@ -64,7 +64,9 @@ const Forecast = ({changeBackground}) => {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-        "x-rapidapi-key": "3caec1c9f0mshab6fd9e79acda91p10cd03jsn665791528a22"
+        // "x-rapidapi-key": "3caec1c9f0mshab6fd9e79acda91p10cd03jsn665791528a22"
+        "x-rapidapi-key": "0bfda3ec6fmshd423ec0929c0787p181fb2jsn85dfe6241ad5"
+
 	}
     })
 
@@ -85,6 +87,7 @@ const Forecast = ({changeBackground}) => {
                    <button type="submit" className="submit-button">Search</button>
                    <div id="wrapper"></div>
                </form>
+               <br></br>
                <div className="forecast">
                {/* {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched yet"} */}
                {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div class="loader"></div>}
