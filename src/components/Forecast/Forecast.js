@@ -45,7 +45,6 @@ const Forecast = ({changeBackground}) => {
        }
    }
 
-
     function clickList(e){
         setMainCity(e.target.id)
 
@@ -53,9 +52,6 @@ const Forecast = ({changeBackground}) => {
         if (removeIt != null) {
             removeIt.remove()
         }
-
-        
-
     }
 
     function sendBackground(finalRes, finalCity) {
@@ -91,7 +87,7 @@ const Forecast = ({changeBackground}) => {
                    <div id="wrapper"></div>
                </form>
                <div className="forecast">
-               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
+               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched yet"}
                </div>
 
           </div>

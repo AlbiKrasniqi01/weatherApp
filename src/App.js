@@ -60,10 +60,8 @@ function App() {
   let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
 
-//   const random_bg = Math.floor((Math.random() * 3) + 1);
-
 const [buttonPopup, setButtonPopup] = useState(false);
-// const [menuPopup, setMenuPopup] = useState(false);
+
   function changeBackground(weatherType) {
 
       if (weatherType === "Clear") {
@@ -121,22 +119,19 @@ const [buttonPopup, setButtonPopup] = useState(false);
 
     <div className="body">
         <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-            {/* {size.width}px / {size.height}px */}
-            {/* <h1>Weather App</h1> */}
-            <h2>{date}</h2>
+          <div className='topTab'>
             <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
             <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
-            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}>
+              <h2>{date}</h2>
+            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
 
-        </Settings>
-              {/* Weather fetching component  */}
+            {/* Weather fetching component */}
             <Forecast changeBackground = {changeBackground} />
-
+            </div>
         <div className='bottomTab'>
           <h2>Overview</h2>
           <FiveDayForecast/>
-
-    </div>
+         </div>
   </div>
   </div>
   );

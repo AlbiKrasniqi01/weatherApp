@@ -13,27 +13,37 @@
   color: white;
 }
 
+/* TEMPORARY CSS  */
 .fiveDayText {
   color: black;
 }
+
+/* Heading CSS  */
 h1 {
   font-size: 64px;
   text-shadow: 1px 1px 3px #000000;
 }
 
 h2 {
-  text-shadow: 1px 1px 3px #000000;
-  
+  text-shadow: 1px 1px 3px #000000;  
 }
 
+h4 {
+  text-shadow: 1px 1px 3px #000000;
+}
+.noSpacing {
+  padding: -10000px;
+}
+
+/* Image and Icon CSS Styling  */
 #photo {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   -webkit-filter: drop-shadow(1px 1px 3px #000000);
-  filter: drop-shadow(1px 1px 3px #000000);}
+  filter: drop-shadow(1px 1px 3px #000000);
+}
 
 .refreshIcon {
-  top:3px;
   height: 30px;
   width: 30px;
   right: 5px;
@@ -42,7 +52,6 @@ h2 {
 }
 
 .menuIcon {
-  top:3px;
   height: 30px;
   width: 30px;
   left: 3px;
@@ -52,16 +61,23 @@ h2 {
 }
 
 .fadeBackground {
-  width: 60%;
+  width: 70%;
   margin: auto;
-  
-  background: rgba(255, 255, 255, 0.3)
+  background: rgba(255, 255, 255, 0.3);
+  line-height: 40px;
 }
 
 .fiveBackground {
   background: #26c941;
   width: 50%;
 }
+.topTab {
+  position: absolute;
+  height: 60%;
+  width: 100%;
+  
+}
+
 .bottomTab {
   position: absolute;
   width: 100%;
@@ -98,46 +114,7 @@ h2 {
   color: #61dafb;
 }
 
-button {
-  background-color: white;
-  font-size: 14px;
-  border-radius: 10px;
-  padding: 10px;
-}
 
-.settingsTab{
-  position: absolute;
-  width: 0%;
-  height: 100%;
-  bottom: 0px;
-  background-color: white;
-  color: #365aa1;
-  border-radius: 20px;
-}
-
-.settingsButton{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 30px;
-    background-color: rgba(255, 0, 0, 0.2);
-    background-size: cover;
-    
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.menuButton {
-  background-color: #26c941;
-  height: 30px;
-  width: 30px;
-  left: 5px;
-  top: 3px;
-  position: absolute;
-}
 
 @keyframes App-logo-spin {
   from {

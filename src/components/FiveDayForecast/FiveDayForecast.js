@@ -28,7 +28,7 @@ const FiveDayForecast = () => {
             <div>
 
                 <div className="five_forecast">
-                {mainCity !== '' ? <Forecast responseObj={responseObj} mainCity = {mainCity} getFiveDayForecast = {getFiveDayForecast}/> : "No cities searcheddd"}
+                {mainCity !== '' ? <Forecast responseObj={responseObj} mainCity = {mainCity} getFiveDayForecast = {getFiveDayForecast}/> : "No cities searched!"}
                 <h2>{mainCity} </h2>
                 </div>
  
