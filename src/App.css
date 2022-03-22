@@ -20,27 +20,28 @@
 
 /* Heading CSS  */
 h1 {
-  font-size: 56px;
   text-shadow: 1px 1px 3px #000000;
 }
 
 h2 {
-  text-shadow: 1px 1px 3px #000000;  
+  text-shadow: 1px 1px 3px #000000;
 }
 
 h4 {
   text-shadow: 1px 1px 3px #000000;
 }
-.dateText {
+
+/* Text formatting styles  */
+
+#dateText {
+  font-size: 24px;
   padding: 20px;
-  padding-bottom: 2px;
+  padding-bottom: 0px;
+  line-height: 5px;
 }
 
-h4 {
-  text-shadow: 1px 1px 3px #000000;
-}
-.dateText {
-  padding: 20px;
+#timeText {
+  font-size: 20px;
   padding-bottom: 2px;
 }
 

@@ -125,14 +125,13 @@ function App(props) {
             <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
             <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
             <IntlProvider locale={locale} messages={messages[locale]}>
-                <h1 className='dateText'>
+                <h1 id='dateText'>
                 <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
                 </h1>
-                <h1 id = "time">
+                <h1 id = "timeText">
                     <FormattedTime value = {props.time} />
                 </h1>
             </IntlProvider>
-            {/* <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings> */}
             {/* Weather fetching component */}
             <Forecast changeBackground = {changeBackground} locale={locale} />
     </div>

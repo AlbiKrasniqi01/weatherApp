@@ -14,6 +14,7 @@ const messages = {
     }
 };
 
+
 const FiveDayForecast = ({responseObj, mainCity, locale}) => {
 
     // let [mainCity, setMainCity] = useState('');
@@ -21,11 +22,14 @@ const FiveDayForecast = ({responseObj, mainCity, locale}) => {
 
 
     const getFiveDayForecast = async() => {
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${mainCity}&cnt=5&units=metric`, {
+                        //   fetch('https://community-open-weather-map.p.rapidapi.com/forecast/daily?lat=35&lon=139&cnt=5&units=metric', options)
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/climate/month?q=london%2Cuk&units=metric`, {
+                         
+        // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${mainCity}&cnt=5&units=metric`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                "x-rapidapi-key": "221a3f948bmsh42abe4d765c15efp160ee0jsnc6271a62d749"
+                "x-rapidapi-key": "0bfda3ec6fmshd423ec0929c0787p181fb2jsn85dfe6241ad5"
             }
         })
 
@@ -39,13 +43,12 @@ const FiveDayForecast = ({responseObj, mainCity, locale}) => {
        <div>
            <div>
                <IntlProvider locale={locale} messages={messages[locale]}>
-                   <button>
-                       <FormattedMessage id="buttonText" defaultMessage="Five Day Forecast" value={{locale}}></FormattedMessage>
-                   </button>
                </IntlProvider>
                <div className="five_forecast">
                   {mainCity !== '' ? <FiveDayConditions responseObj={responseObj} mainCity = {mainCity} /> : "No cities searched!"}
                </div>
+               {/* </IntlProvider> */}
+
            </div>
        </div>
    )
