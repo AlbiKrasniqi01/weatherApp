@@ -1,44 +1,78 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
+import { IntlProvider, FormattedMessage } from 'react-intl';
+import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
 
-const Forecast = ({changeBackground}) => {
+const messages = {
+    en: {
+        noSearch:"No Cities Searched",
+        alertText:"Please enter a location.",
+        heading:"Overview",
+        search:"Search",
+    },
+    es: {
+        noSearch:"No se han buscado ciudades",
+        alertText:"Por favor ingrese una ubicación",
+        heading:"Resumen",
+        search:"Búsqueda",
+    },
+    fr: {
+        noSearch:"Aucune ville recherchée",
+        alertText:"Veuillez saisir un lieu",
+        heading:"Résumer",
+        search:"Chercher",
+    }
+};
+
+const Forecast = ({ changeBackground, locale }) => {
 
    let [search, setSearch] = useState('');
    let [mainCity, setMainCity] = useState('');
    let [responseObj, setResponseObj] = useState({});
 
+    useEffect(() => {
+        if (locale === "en") {
+            document.getElementById('searchInput').placeholder = "Search Cities"
+        } else if (locale === "es") {
+            document.getElementById('searchInput').placeholder = "Buscar Ciudades"
+        } else if (locale === "fr") {
+            document.getElementById('searchInput').placeholder = "Rechercher Des Villes"
+        }
+    })
 
    const onSubmit = async(e) => {
        e.preventDefault()
 
        if(!search){
-           alert('Please enter a location.')
+           document.getElementById('forecast').textContent = messages[locale].alertText;
        }
        else {
            var data = await getForecast({search})
-           setResponseObj(data)
+           if (data.count === 0 ) {
+               setMainCity('')
+           } else {
 
-           if (data != null) {
+            setResponseObj(data)
+            var removeIt = document.getElementById('tempList');
 
-               var removeIt = document.getElementById('tempList');
-               if (removeIt != null) {
-                   removeIt.remove()
-               }
+            if (removeIt != null) {
+                removeIt.remove()
+            }
 
-               var t = document.createElement('ul');
-               t.setAttribute('id', 'tempList')
+            var t = document.createElement('ul');
+            t.setAttribute('id', 'tempList')
 
-               if (data.count > 1) {
-                   for (var i = 0; i < (data.count); i++) {
-                       var listOptions = document.createElement('li');
-                       listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
-                       listOptions.setAttribute('id', i)
-                       listOptions.addEventListener('click', clickList)
-                       t.appendChild(listOptions)
-                   }
-                   document.getElementById('wrapper').appendChild(t)
-               }
+            if (data.count > 1) {
+                for (var i = 0; i < (data.count); i++) {
+                    var listOptions = document.createElement('li');
+                    listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
+                    listOptions.setAttribute('id', i)
+                    listOptions.addEventListener('click', clickList)
+                    t.appendChild(listOptions)
+                }
+                document.getElementById('wrapper').appendChild(t)
+            }
            }
        }
    }
@@ -56,6 +90,8 @@ const Forecast = ({changeBackground}) => {
     function sendBackground(finalRes, finalCity) {
        changeBackground(finalRes.list[finalCity].weather[0].main)
     }
+
+
 
    const getForecast = async() => {
       //weather data fetch function will go here
@@ -78,14 +114,31 @@ const Forecast = ({changeBackground}) => {
                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
                <form className="searchBar"  onSubmit={onSubmit}>
                    <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
-                   <button type="submit" className="submit-button">Search</button>
+                   <button type="submit" className="submit-button">
+                       <IntlProvider locale={locale} messages={messages[locale]}>
+                               <FormattedMessage id="search" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+                       </IntlProvider>
+                   </button>
                    <div id="wrapper"></div>
                </form>
-               <div className="forecast">
-               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
+               <div id="forecast">
+               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale}/> :
+                   <IntlProvider locale={locale} messages={messages[locale]}>
+                       <h3>
+                       <FormattedMessage id="noSearch" defaultMessage="No Cities searched" value={{locale}}></FormattedMessage>
+                       </h3>
+                   </IntlProvider>
+               }
                </div>
-
           </div>
+           <div className='bottomTab'>
+               <IntlProvider locale={locale} messages={messages[locale]}>
+               <h2>
+                   <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+               </h2>
+               </IntlProvider>
+               <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} />
+           </div>
        </div>
    )
 }

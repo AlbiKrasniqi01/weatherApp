@@ -2,7 +2,7 @@ import refreshicon from './assets/refreshicon.png'; // with import
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
-import FiveDayForecast from './components/FiveDayForecast/FiveDayForecast';
+import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
 import windy1 from './assets/windy1.jpeg';
 import sunny1 from './assets/sunny1.jpeg';
 import rainy3 from './assets/rainy3.jpeg';
@@ -36,13 +36,23 @@ function useWindowSize() {
   return windowSize;
 }
 
+const messages = {
+    en: {
+        heading:"Overview",
+    },
+    es: {
+        heading:"Resumen",
+    },
+    fr: {
+        heading:"Résumer",
+    }
+};
 
-function App() {
-  const size = useWindowSize();
-  const current = new Date();  
-  let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
+
+function App(props) {
+
+  const size = useWindowSize()
+  const [locale, setLocale] = useState('en')
 
   function changeBackground(weatherType) {
 
@@ -55,22 +65,30 @@ function App() {
       } else if (weatherType === "Storm") {
           document.getElementById('App').style.background = `url(${thunder1}`
       }
+  }
 
+  const handleChange = (e) => {
+      setLocale(e.target.value)
   }
 
   return (
 
     <div className="body">
         <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-            {/* {size.width}px / {size.height}px */}
-            {/* <h1>Weather App</h1> */}
-            <h2>{date}</h2>
-              {/* Weather fetching component  */}
-            <Forecast changeBackground = {changeBackground} />
-        <div className='bottomTab'>
-          <h2>Overview</h2>
-          <FiveDayForecast/>
-        </div>
+            <select onChange={handleChange} defaultValue="{locale}">
+                {['en', 'es', 'fr'].map((x) => (
+                    <option key={x}>{x}</option>
+                ))}
+            </select>
+            <IntlProvider locale={locale} messages={messages[locale]}>
+                <h1>
+                <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
+                </h1>
+                <h1 id = "time">
+                    <FormattedTime value = {props.time} />
+                </h1>
+            </IntlProvider>
+            <Forecast changeBackground = {changeBackground} locale={locale} />
     </div>
   </div>
   );
