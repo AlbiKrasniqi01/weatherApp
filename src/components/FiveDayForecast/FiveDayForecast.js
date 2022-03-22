@@ -1,75 +1,41 @@
 import React, { useState } from 'react';
 import FiveDayConditions from '../FiveDayConditions/FiveDayConditions';
+import Conditions from '../Conditions/Conditions';
+import Forecast from '../Forecast/Forecast';
 
 const FiveDayForecast = () => {
 
-    
-   let [city, setCity] = useState('');
+    let [mainCity, setMainCity] = useState('');
+    let [responseObj, setResponseObj] = useState({});
 
-   
-   const uriEncodedLocation =  encodeURIComponent(city);
+ 
+    const getFiveDayForecast = async() => {
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${mainCity}&cnt=5&units=metric`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+                "x-rapidapi-key": "221a3f948bmsh42abe4d765c15efp160ee0jsnc6271a62d749"
+            }
+        })
 
+ 
+     const data = await res.json()
+     console.log(data)
+     return data
+    }
+        return (
+        <div>
+            <div>
 
-   let [responseObj, setResponseObj] = useState({});
-   function getFiveDayForecast() {
-
-    fetch("https://community-open-weather-map.p.rapidapi.com/forecast?q=london%2C%20uk&units=metric", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "13f80ceb94msh62f26b55dc2eb41p1b5ecfjsnc82ae62ece3d"
-	}
-})
-.then(response => response.json())
-.then(response => {
-    setResponseObj(response)
-})
-
-function getForecast(e) {
-    e.preventDefault();
+                <div className="five_forecast">
+                {mainCity !== '' ? <Forecast responseObj={responseObj} mainCity = {mainCity} getFiveDayForecast = {getFiveDayForecast}/> : "No cities searcheddd"}
+                <h2>{mainCity} </h2>
+                </div>
+ 
+           </div>
+        </div>
+    )
 }
-
-}
-
-
-
-//       //weather data fetch function will go here
-//       fetch("https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=London%2Cuk", {
-//       //fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=metric&q=${uriEncodedLocation}`, {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-// 		"x-rapidapi-key": "13f80ceb94msh62f26b55dc2eb41p1b5ecfjsnc82ae62ece3d"
-// 	}
-// })
-
-//     .then(response => response.json())
-//     .then(response => {
-//         setResponseObj(response)
-//     })
-
-//     function getForecast(e) {
-//         e.preventDefault();
-//     }
-    
-//    }
-
-   return (
-       // JSX code will go here
-       
-       <div>
-           {/* <div>
-               {JSON.stringify(responseObj)}
-           </div> */}
-           <div>
-                 <FiveDayConditions
-               responseObj={responseObj}
-               />
-               <button onClick={getFiveDayForecast}>Get Fiveday Forecast</button>
-     
-       </div>
-       </div>
-   )
-}
-
-export default FiveDayForecast;
+ 
+ export default FiveDayForecast
+ 

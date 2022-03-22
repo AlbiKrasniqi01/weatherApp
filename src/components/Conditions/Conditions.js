@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import sunnyicon from '../../assets/sunnyicon.png'; 
-import cloudyicon from '../../assets/cloudyicon.png'; 
+import cloudyicon from '../../assets/cloudyicon2.png'; 
 import rainyicon from '../../assets/rainyicon.png'; 
 import windyicon from '../../assets/windyicon.png'; 
 import snowicon from '../../assets/snowicon.png';
@@ -27,11 +27,11 @@ const Conditions = ({ responseObj, mainCity, sendBackground }) => {
 
    return (       
        <div>
-               <div>
+               <div className='fadeBackground'>
                    <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
                    <h1 id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
                    <img id='photo' src={sunnyicon} />
-                   <h2>{responseObj.list[mainCity].description}</h2>
+                   <h4>{responseObj.list[mainCity].weather[0].description}</h4>
                </div>
        </div>
    )

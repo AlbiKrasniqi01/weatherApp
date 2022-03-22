@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
+import menuicon from "../../assets/menuicon.png";
 
 const Forecast = ({changeBackground}) => {
 
    let [search, setSearch] = useState('');
    let [mainCity, setMainCity] = useState('');
    let [responseObj, setResponseObj] = useState({});
-
+   
 
    const onSubmit = async(e) => {
        e.preventDefault()
@@ -38,10 +39,12 @@ const Forecast = ({changeBackground}) => {
                        t.appendChild(listOptions)
                    }
                    document.getElementById('wrapper').appendChild(t)
+
                }
            }
        }
    }
+
 
     function clickList(e){
         setMainCity(e.target.id)
@@ -51,6 +54,8 @@ const Forecast = ({changeBackground}) => {
             removeIt.remove()
         }
 
+        
+
     }
 
     function sendBackground(finalRes, finalCity) {
@@ -59,11 +64,11 @@ const Forecast = ({changeBackground}) => {
 
    const getForecast = async() => {
       //weather data fetch function will go here
+
      const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		// "x-rapidapi-key": "97bd49d7c7msh76d11e9c9552604p131c5fjsnf16aadec91dc"
         "x-rapidapi-key": "3caec1c9f0mshab6fd9e79acda91p10cd03jsn665791528a22"
 	}
     })
@@ -73,22 +78,29 @@ const Forecast = ({changeBackground}) => {
     return data
    }
 
+
+
        return (
+
        <div>
            <div>
+
                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+               <img className="menuIcon" src={menuicon} alt=""/>
                <form className="searchBar"  onSubmit={onSubmit}>
                    <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
                    <button type="submit" className="submit-button">Search</button>
                    <div id="wrapper"></div>
                </form>
                <div className="forecast">
-               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
+               {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
+
                </div>
 
           </div>
        </div>
    )
+
 }
 
 export default Forecast;

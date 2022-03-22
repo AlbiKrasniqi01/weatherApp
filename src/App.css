@@ -25,6 +25,10 @@ h2 {
   text-shadow: 1px 1px 3px #000000;
 }
 
+h4 {
+  text-shadow: 1px 1px 3px #000000;
+}
+
 #photo {
   height: 80px;
   width: 80px;
@@ -33,19 +37,39 @@ h2 {
 
 .refreshIcon {
   top:3px;
-  height: 40px;
+  height: 30px;
   right: 5px;
   position: absolute;
   cursor:pointer;
 }
 
+.menuIcon {
+  top:3px;
+  height: 30px;
+  left: 5px;
+  position: absolute;
+  cursor:pointer;
+
+}
+
+.fadeBackground {
+  width: 60%;
+  margin: auto;
+  
+  background: rgba(255, 255, 255, 0.3)
+}
+
+.fiveBackground {
+  background: #26c941;
+  width: 50%;
+}
 .bottomTab {
   position: absolute;
   width: 100%;
-  height: 20%;
+  height: 40%;
   bottom: 0px;
   background-color: white;
-  color: #282c34;
+  color: rgb(180, 180, 180);
   border-radius: 20px;
 }
 .App-logo {
