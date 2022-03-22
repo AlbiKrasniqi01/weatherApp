@@ -128,9 +128,11 @@ const [buttonPopup, setButtonPopup] = useState(false);
             {/* Weather fetching component */}
             <Forecast changeBackground = {changeBackground} />
             </div>
+            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
+
         <div className='bottomTab'>
           <h2>Overview</h2>
-          <FiveDayForecast/>
+          {/* <FiveDayForecast/> */}
          </div>
   </div>
   </div>
