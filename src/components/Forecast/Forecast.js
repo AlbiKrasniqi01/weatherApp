@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
-import menuicon from "../../assets/menuicon.png";
+import menuIcon from "../../assets/menuicon.png";
 
 const Forecast = ({changeBackground}) => {
 
@@ -85,8 +85,6 @@ const Forecast = ({changeBackground}) => {
        <div>
            <div>
 
-               <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
-               <img className="menuIcon" src={menuicon} alt=""/>
                <form className="searchBar"  onSubmit={onSubmit}>
                    <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
                    <button type="submit" className="submit-button">Search</button>

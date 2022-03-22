@@ -18,7 +18,9 @@ import thunder3 from './assets/thunder3.jpeg';
 import cloudy1 from './assets/cloudy1.jpeg';
 import cloudy2 from './assets/cloudy2.jpeg';
 import cloudy3 from './assets/cloudy3.jpeg';
+import menuIcon from './assets/menuicon.png';
 import Settings from './components/Settings/Settings';
+import getForecast from './components/Forecast/Forecast';
 import { t } from 'i18next';
 
 // Hookcago
@@ -61,7 +63,7 @@ function App() {
 //   const random_bg = Math.floor((Math.random() * 3) + 1);
 
 const [buttonPopup, setButtonPopup] = useState(false);
-
+// const [menuPopup, setMenuPopup] = useState(false);
   function changeBackground(weatherType) {
 
       if (weatherType === "Clear") {
@@ -122,6 +124,11 @@ const [buttonPopup, setButtonPopup] = useState(false);
             {/* {size.width}px / {size.height}px */}
             {/* <h1>Weather App</h1> */}
             <h2>{date}</h2>
+            <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+            <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
+            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}>
+
+        </Settings>
               {/* Weather fetching component  */}
             <Forecast changeBackground = {changeBackground} />
 
@@ -129,15 +136,6 @@ const [buttonPopup, setButtonPopup] = useState(false);
           <h2>Overview</h2>
           <FiveDayForecast/>
 
-        <div className="settingsTab">
-            <main className="settingsMain">
-                <button className="settingsButton"  onClick={() => setButtonPopup(true)}><img src = "./assets/settingicon.jpg"/></button>
-            </main>
-
-            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}>
-
-            </Settings>
-        </div>
     </div>
   </div>
   </div>
