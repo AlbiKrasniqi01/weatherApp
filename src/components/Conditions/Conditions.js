@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import sunnyicon from '../../assets/sunnyicon.png';
-import cloudyicon from '../../assets/cloudyicon2.png';
+import cloudyicon from '../../assets/cloudyicon.png';
 import rainyicon from '../../assets/rainyicon.png'; 
 import windyicon from '../../assets/windyicon.png'; 
 import snowicon from '../../assets/snowicon.png';

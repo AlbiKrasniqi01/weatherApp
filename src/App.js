@@ -3,7 +3,7 @@ import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
 import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
-import Settings from './components/Settings/Settings';
+// import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpeg';
 import windy2 from './assets/windy2.jpeg';
 import windy3 from './assets/windy3.jpeg';
@@ -132,7 +132,7 @@ function App(props) {
                     <FormattedTime value = {props.time} />
                 </h1>
             </IntlProvider>
-            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
+            {/* <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings> */}
             {/* Weather fetching component */}
             <Forecast changeBackground = {changeBackground} locale={locale} />
     </div>

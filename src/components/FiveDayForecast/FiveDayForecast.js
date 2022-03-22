@@ -18,8 +18,8 @@ const messages = {
 
 const FiveDayForecast = ({responseObj, mainCity, locale}) => {
 
-    let [mainCity, setMainCity] = useState('');
-    let [responseObj, setResponseObj] = useState({});
+    // let [mainCity, setMainCity] = useState('');
+    // let [responseObj, setResponseObj] = useState({});
 
 
     const getFiveDayForecast = async() => {
@@ -37,7 +37,7 @@ const FiveDayForecast = ({responseObj, mainCity, locale}) => {
     }
 
 
-   return
+   return (
        <div>
            <div>
                <FiveDayConditions responseObj={responseObj}/>

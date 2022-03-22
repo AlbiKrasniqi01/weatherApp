@@ -3,7 +3,7 @@ import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
-import './Forecast.css';
+// import './Forecast.css';
 
 const messages = {
     en: {
@@ -122,7 +122,7 @@ const Forecast = ({ changeBackground, locale }) => {
                    <div id="wrapper"></div>
                </form>
                <div id="forecast">
-                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div class="loader"></div>}
+                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div className="loader"></div>}
                </div>
           </div>
            <div className='bottomTab'>
