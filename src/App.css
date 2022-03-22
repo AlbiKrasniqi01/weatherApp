@@ -23,6 +23,7 @@ h1 {
 
 h2 {
   text-shadow: 1px 1px 3px #000000;
+  
 }
 
 #photo {
@@ -80,6 +81,31 @@ button {
   font-size: 14px;
   border-radius: 10px;
   padding: 10px;
+}
+
+.settingsTab{
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  bottom: 0px;
+  background-color: white;
+  color: #282c34;
+  border-radius: 20px;
+}
+
+.settingsButton{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    background-size: cover;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes App-logo-spin {

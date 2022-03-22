@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
+import './Forecast.css'
 
 const Forecast = ({changeBackground}) => {
 
