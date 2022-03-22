@@ -7,7 +7,6 @@ import snowicon from '../../assets/snowicon.png';
 
 const Conditions = ({ responseObj, mainCity, sendBackground, locale }) => {
 
-
     sendBackground(responseObj, mainCity)
 
     useEffect(() => {
