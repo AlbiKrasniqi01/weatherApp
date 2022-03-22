@@ -1,8 +1,9 @@
 import refreshicon from './assets/refreshicon.png'; // with import
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
-import FiveDayForecast  from './components/FiveDayForecast/FiveDayForecast';
 import React, {useState, useEffect} from "react";
+import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
+// import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';
 import windy3 from './assets/windy3.jpg';
@@ -19,9 +20,7 @@ import cloudy1 from './assets/cloudy1.jpg';
 import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
 import menuIcon from './assets/menuicon.png';
-import Settings from './components/Settings/Settings';
 import getForecast from './components/Forecast/Forecast';
-import { t } from 'i18next';
 
 // Hookcago
 function useWindowSize() {
@@ -53,87 +52,90 @@ function useWindowSize() {
 //Number generator to randomly select background
 const random_bg = Math.floor((Math.random() * 3) + 1);
 
-function App() {
-  const size = useWindowSize();
-  const current = new Date();  
-  let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
+const messages = {
+    en: {
+        heading:"Overview",
+    },
+    es: {
+        heading:"Resumen",
+    },
+    fr: {
+        heading:"Résumer",
+    }
+};
 
-const [buttonPopup, setButtonPopup] = useState(false);
+
+function App(props) {
+
+  const size = useWindowSize()
+  const [locale, setLocale] = useState('en')
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   function changeBackground(weatherType) {
-
       if (weatherType === "Clear") {
-
-        if (random_bg == 1){
-            document.getElementById('App').style.background = `url(${sunny1})`
-          }
-          else if (random_bg == 2) {
-            document.getElementById('App').style.background = `url(${sunny2})`
-          }
-          else if (random_bg == 3) {
-            document.getElementById('App').style.background = `url(${sunny3})`
+          if (random_bg == 1) {
+              document.getElementById('App').style.background = `url(${sunny1})`
+          } else if (random_bg == 2) {
+              document.getElementById('App').style.background = `url(${sunny2})`
+          } else if (random_bg == 3) {
+              document.getElementById('App').style.background = `url(${sunny3})`
           }
 
-      } 
-      else if (weatherType ==="Clouds") {
+      } else if (weatherType === "Clouds") {
 
-        if (random_bg == 1){
-            document.getElementById('App').style.background = `url(${cloudy1})`
+          if (random_bg == 1) {
+              document.getElementById('App').style.background = `url(${cloudy1})`
+          } else if (random_bg == 2) {
+              document.getElementById('App').style.background = `url(${cloudy2})`
+          } else if (random_bg == 3) {
+              document.getElementById('App').style.background = `url(${cloudy3})`
           }
-          else if (random_bg == 2) {
-            document.getElementById('App').style.background = `url(${cloudy2})`
+      } else if (weatherType === "Rain") {
+          if (random_bg == 1) {
+              document.getElementById('App').style.background = `url(${rainy1})`
+          } else if (random_bg == 2) {
+              document.getElementById('App').style.background = `url(${rainy2})`
+          } else if (random_bg == 3) {
+              document.getElementById('App').style.background = `url(${rainy3})`
           }
-          else if (random_bg == 3) {
-            document.getElementById('App').style.background = `url(${cloudy3})`
-          }
-      } 
-
-      else if (weatherType === "Rain") {
-        if (random_bg == 1){
-            document.getElementById('App').style.background = `url(${rainy1})`
-          }
-          else if (random_bg == 2) {
-            document.getElementById('App').style.background = `url(${rainy2})`
-          }
-          else if (random_bg == 3) {
-            document.getElementById('App').style.background = `url(${rainy3})`
-          }
-      } 
-      else if (weatherType === "Storm") {
-        if (random_bg == 1){
-            document.getElementById('App').style.background = `url(${thunder1})`
-          }
-          else if (random_bg == 2) {
-            document.getElementById('App').style.background = `url(${thunder2})`
-          }
-          else if (random_bg == 3) {
-            document.getElementById('App').style.background = `url(${thunder3})`
+      } else if (weatherType === "Storm") {
+          if (random_bg == 1) {
+              document.getElementById('App').style.background = `url(${thunder1})`
+          } else if (random_bg == 2) {
+              document.getElementById('App').style.background = `url(${thunder2})`
+          } else if (random_bg == 3) {
+              document.getElementById('App').style.background = `url(${thunder3})`
           }
       }
+  }
 
+  const handleChange = (e) => {
+      setLocale(e.target.value)
   }
 
   return (
 
     <div className="body">
         <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-          <div className='topTab'>
+            <select onChange={handleChange} defaultValue="{locale}">
+                {['en', 'es', 'fr'].map((x) => (
+                    <option key={x}>{x}</option>
+                ))}
+            </select>
             <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
             <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
-              <h2 className='dateText'>{date}</h2>
-
+            <IntlProvider locale={locale} messages={messages[locale]}>
+                <h1 className='dateText'>
+                <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
+                </h1>
+                <h1 id = "time">
+                    <FormattedTime value = {props.time} />
+                </h1>
+            </IntlProvider>
+            {/* <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings> */}
             {/* Weather fetching component */}
-            <Forecast changeBackground = {changeBackground} />
-            </div>
-            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
-
-        <div className='bottomTab'>
-          <h2>Overview</h2>
-          {/* <FiveDayForecast/> */}
-         </div>
-  </div>
+            <Forecast changeBackground = {changeBackground} locale={locale} />
+    </div>
   </div>
   );
 }

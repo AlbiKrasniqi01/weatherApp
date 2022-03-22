@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import FiveDayConditions from '../FiveDayConditions/FiveDayConditions';
-import Conditions from '../Conditions/Conditions';
-import Forecast from '../Forecast/Forecast';
+import { IntlProvider, FormattedMessage } from 'react-intl';
 
-const FiveDayForecast = () => {
+const messages = {
+    en: {
+        buttonText:"Five Day Forecast",
+    },
+    es: {
+        buttonText:"Pronóstico de cinco días",
+    },
+    fr: {
+        buttonText:"Prévisions sur cinq jours",
+    }
+};
 
-    let [mainCity, setMainCity] = useState('');
-    let [responseObj, setResponseObj] = useState({});
+const FiveDayForecast = ({responseObj, mainCity, locale}) => {
 
- 
+    // let [mainCity, setMainCity] = useState('');
+    // let [responseObj, setResponseObj] = useState({});
+
+
     const getFiveDayForecast = async() => {
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${mainCity}&cnt=5&units=metric`, {
             "method": "GET",
@@ -18,24 +29,27 @@ const FiveDayForecast = () => {
             }
         })
 
- 
-     const data = await res.json()
-     console.log(data)
-     return data
+        const data = await res.json()
+        console.log(data)
+        return data
     }
-        return (
-        <div>
-            <div>
 
-                <div className="five_forecast">
-                {mainCity !== '' ? <Forecast responseObj={responseObj} mainCity = {mainCity} getFiveDayForecast = {getFiveDayForecast}/> : "No cities searched!"}
-                <h2>{mainCity} </h2>
-                </div>
- 
+
+   return (
+       <div>
+           <div>
+               <IntlProvider locale={locale} messages={messages[locale]}>
+                   <button>
+                       <FormattedMessage id="buttonText" defaultMessage="Five Day Forecast" value={{locale}}></FormattedMessage>
+                   </button>
+               </IntlProvider>
+               <div className="five_forecast">
+                  {mainCity !== '' ? <FiveDayConditions responseObj={responseObj} mainCity = {mainCity} /> : "No cities searched!"}
+               </div>
            </div>
-        </div>
-    )
+       </div>
+   )
 }
- 
- export default FiveDayForecast
+
+export default FiveDayForecast;
  
