@@ -31,11 +31,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground }) => {
                    <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
                    <h1 id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
                    <img id='photo' src={sunnyicon} />
-<<<<<<< HEAD
                    <h4>{responseObj.list[mainCity].weather[0].description}</h4>
-=======
-                   <h2>{responseObj.list[mainCity].description}</h2>
->>>>>>> 6536cc221ba60ce8a41c6f958545abee9d1a393a
                </div>
        </div>
    )

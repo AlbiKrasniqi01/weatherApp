@@ -23,14 +23,7 @@ h1 {
 
 h2 {
   text-shadow: 1px 1px 3px #000000;
-<<<<<<< HEAD
-}
-
-h4 {
-  text-shadow: 1px 1px 3px #000000;
-=======
   
->>>>>>> 6536cc221ba60ce8a41c6f958545abee9d1a393a
 }
 
 #photo {
@@ -41,11 +34,7 @@ h4 {
 
 .refreshIcon {
   top:3px;
-<<<<<<< HEAD
-  height: 30px;
-=======
   height: 40px;
->>>>>>> 6536cc221ba60ce8a41c6f958545abee9d1a393a
   right: 5px;
   position: absolute;
   cursor:pointer;
