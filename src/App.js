@@ -18,6 +18,8 @@ import thunder3 from './assets/thunder3.jpeg';
 import cloudy1 from './assets/cloudy1.jpeg';
 import cloudy2 from './assets/cloudy2.jpeg';
 import cloudy3 from './assets/cloudy3.jpeg';
+import Settings from './components/Settings/Settings';
+import { t } from 'i18next';
 
 // Hookcago
 function useWindowSize() {
@@ -57,6 +59,8 @@ function App() {
   const date = `${days[current.getDay()]} ${current.getDate()}  ${months[current.getMonth()]} ${current.getFullYear()}  `;
 
 //   const random_bg = Math.floor((Math.random() * 3) + 1);
+
+const [buttonPopup, setButtonPopup] = useState(false);
 
   function changeBackground(weatherType) {
 
@@ -124,8 +128,18 @@ function App() {
         <div className='bottomTab'>
           <h2>Overview</h2>
           <FiveDayForecast/>
+
+        <div className="settingsTab">
+            <main className="settingsMain">
+                <button className="settingsButton"  onClick={() => setButtonPopup(true)}><img src = "./assets/settingicon.jpg"/></button>
+            </main>
+
+            <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}>
+
+            </Settings>
         </div>
     </div>
+  </div>
   </div>
   );
 }

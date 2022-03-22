@@ -93,8 +93,7 @@ const Forecast = ({changeBackground}) => {
                    <div id="wrapper"></div>
                </form>
                <div className="forecast">
-               {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
-
+               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched"}
                </div>
 
           </div>
