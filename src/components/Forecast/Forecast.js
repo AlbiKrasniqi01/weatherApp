@@ -3,6 +3,7 @@ import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
+import './Forecast.css';
 
 const messages = {
     en: {
@@ -111,7 +112,6 @@ const Forecast = ({ changeBackground, locale }) => {
        return (
        <div>
            <div>
-               <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
                <form className="searchBar"  onSubmit={onSubmit}>
                    <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
                    <button type="submit" className="submit-button">
@@ -122,13 +122,7 @@ const Forecast = ({ changeBackground, locale }) => {
                    <div id="wrapper"></div>
                </form>
                <div id="forecast">
-               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale}/> :
-                   <IntlProvider locale={locale} messages={messages[locale]}>
-                       <h3>
-                       <FormattedMessage id="noSearch" defaultMessage="No Cities searched" value={{locale}}></FormattedMessage>
-                       </h3>
-                   </IntlProvider>
-               }
+                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div class="loader"></div>}
                </div>
           </div>
            <div className='bottomTab'>

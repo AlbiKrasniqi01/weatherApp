@@ -13,44 +13,82 @@
   color: white;
 }
 
+/* TEMPORARY CSS  */
 .fiveDayText {
   color: black;
 }
-h1 {
-  font-size: 48px;
-  text-shadow: 1px 1px 3px #000000;
-}
 
-#time {
-  font-size: 28px;
+/* Heading CSS  */
+h1 {
+  font-size: 56px;
+  text-shadow: 1px 1px 3px #000000;
 }
 
 h2 {
   text-shadow: 1px 1px 3px #000000;
 }
 
+h4 {
+  text-shadow: 1px 1px 3px #000000;
+}
+.dateText {
+  padding: 20px;
+  padding-bottom: 2px;
+}
+
+/* Image and Icon CSS Styling  */
 #photo {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   -webkit-filter: drop-shadow(1px 1px 3px #000000);
-  filter: drop-shadow(1px 1px 3px #000000);}
+  filter: drop-shadow(1px 1px 3px #000000);
+}
 
 .refreshIcon {
-  top:3px;
-  height: 40px;
+  height: 30px;
+  width: 30px;
   right: 5px;
   position: absolute;
   cursor:pointer;
 }
 
+.menuIcon {
+  height: 30px;
+  width: 30px;
+  left: 3px;
+  position: absolute;
+  cursor:pointer;
+
+}
+
+.fadeBackground {
+  padding: 3px;
+
+  width: 70%;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.3);
+  line-height: 20px;
+}
+
+.fiveBackground {
+  background: #26c941;
+  width: 50%;
+}
+.topTab {
+  position: absolute;
+  max-height: 60%;
+  width: 100%;
+}
+
 .bottomTab {
   position: absolute;
   width: 100%;
-  height: 20%;
+  max-height: 30%;
+  min-height: 20%;
   bottom: 0px;
-  background-color: white;
-  color: #282c34;
-  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 .App-logo {
   height: 40vmin;
@@ -79,12 +117,7 @@ h2 {
   color: #61dafb;
 }
 
-button {
-  background-color: white;
-  font-size: 14px;
-  border-radius: 10px;
-  padding: 10px;
-}
+
 
 @keyframes App-logo-spin {
   from {
@@ -93,4 +126,20 @@ button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.loader {
+  border: 7px solid #f3f3f3; /* Light grey */
+  border-top: 7px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
