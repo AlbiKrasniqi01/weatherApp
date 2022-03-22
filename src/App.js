@@ -122,7 +122,7 @@ const [buttonPopup, setButtonPopup] = useState(false);
           <div className='topTab'>
             <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
             <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
-              <h2>{date}</h2>
+              <h2 className='dateText'>{date}</h2>
             <Settings trigger={buttonPopup} setTrigger = {setButtonPopup}></Settings>
 
             {/* Weather fetching component */}

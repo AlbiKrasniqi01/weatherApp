@@ -5,8 +5,6 @@ import rainyicon from '../../assets/rainyicon.png';
 import windyicon from '../../assets/windyicon.png'; 
 import snowicon from '../../assets/snowicon.png';
 
-
-
 const Conditions = ({ responseObj, mainCity, sendBackground }) => {
 
    sendBackground(responseObj, mainCity)
@@ -28,10 +26,10 @@ const Conditions = ({ responseObj, mainCity, sendBackground }) => {
    return (       
        <div>
                <div className='fadeBackground'>
-                   <h2 className='noSpacing'>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
-                   <h1 className='noSpacing' id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
-                   <img id='photo' src={sunnyicon} />
-                   <h4 className='noSpacing'>{responseObj.list[mainCity].weather[0].description}</h4>
+                   <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
+                   <h1>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
+                   <img id='photo'/>
+                   <h4>{responseObj.list[mainCity].weather[0].description}</h4>
                </div>
        </div>
    )
