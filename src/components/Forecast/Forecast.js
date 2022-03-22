@@ -122,7 +122,7 @@ const Forecast = ({ changeBackground, locale }) => {
                    <div id="wrapper"></div>
                </form>
                <div id="forecast">
-                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div className="loader"></div>}
+                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale}/> : <div className="loader"></div>}
                </div>
           </div>
            <div className='bottomTab'>
