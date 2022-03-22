@@ -91,11 +91,8 @@ const Forecast = ({ changeBackground, locale }) => {
                    </button>
                    <div id="wrapper"></div>
                </form>
-               <br></br>
-               <div className="forecast">
-               {/* {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : "No cities searched yet"} */}
-               {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground}/> : <div class="loader"></div>}
-
+               <div id="forecast">
+                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale}/> : <div className="loader"></div>}
                </div>
           </div>
            <div className='bottomTab'>
