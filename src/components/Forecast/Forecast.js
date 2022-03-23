@@ -10,19 +10,19 @@ const messages = {
     en: {
         noSearch:"No Cities Searched",
         alertText:"Please enter a location.",
-        heading:"Overview",
+        heading:"Forecast",
         search:"Search",
     },
     es: {
         noSearch:"No se han buscado ciudades",
         alertText:"Por favor ingrese una ubicación",
-        heading:"Resumen",
+        heading:"Pronóstico",
         search:"Búsqueda",
     },
     fr: {
         noSearch:"Aucune ville recherchée",
         alertText:"Veuillez saisir un lieu",
-        heading:"Résumer",
+        heading:"Prévision",
         search:"Chercher",
     }
 };
@@ -97,7 +97,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
 
     const getForecast = async() => {
         //weather data fetch function will go here
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=${units}`, {
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=6&units=${units}`, {
             // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
 
             "method": "GET",
@@ -133,7 +133,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h2>
-                        <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+                        <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
                     </h2>
                 </IntlProvider>
                 {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}

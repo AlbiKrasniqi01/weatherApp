@@ -45,7 +45,7 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units}) => {
     }
 
     const getFiveDayForecast = async() => {
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?cnt=5&units=${units}&id=${id}`, {
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?cnt=6&units=${units}&id=${id}`, {
             "method": "GET",
             "headers": {
                 'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',

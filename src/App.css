@@ -26,6 +26,7 @@ h1 {
 }
 
 h2 {
+  font-size: 22px;
   text-shadow: 1px 1px 3px #000000;
 }
 
@@ -82,33 +83,34 @@ h4 {
 }
 
 .fadeBackground {
+  max-height: 40vh;
   padding: 3px;
-
   width: 70%;
   margin: auto;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
   line-height: 20px;
 }
 
 .fiveBackground {
   background: #26c941;
-  width: 50%;
+  width: 75%;
+  /* margin: auto; */
+  padding: 5px;
+  padding-bottom: 0px;
+  
 }
-.topTab {
-  position: absolute;
-  max-height: 60%;
-  width: 100%;
-}
+
 
 .bottomTab {
   position: absolute;
   width: 100%;
-  max-height: 30%;
+  height: 30%;
   min-height: 20%;
   bottom: 0px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  background-color: hsla(0, 0%, 100%, 0.85);
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  font-size: 24px;
 }
 .App-logo {
   height: 40vmin;
@@ -133,6 +135,37 @@ h4 {
   color: white;
 }
 
+.forecastRow {
+  background-color: white;
+  width: 85%;
+  margin: auto;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  /* margin: 2px; */
+  padding: 1px;
+}
+
+.dayNameText {
+  padding: 10px;
+  background-color: #3498db;
+}
+
+.temperatureNameText {
+  
+}
+
+#fiveDayTemp {
+  display: inline;
+  font-size: 18px;
+  ;
+}
+
+.fiveDayNumerical {
+  font-size: 26px;
+  display: inline;
+  position: absolute;
+  right: 5px;
+}
 .App-link {
   color: #61dafb;
 }

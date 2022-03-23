@@ -3,7 +3,7 @@ import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
 import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
-// import Settings from './components/Settings/Settings';
+import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';
 import windy3 from './assets/windy3.jpg';
@@ -19,8 +19,10 @@ import thunder3 from './assets/thunder3.jpg';
 import cloudy1 from './assets/cloudy1.jpg';
 import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
-import menuIcon from './assets/menuicon.png';
+import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
+import Moment from 'react-moment';
+
 
 // Hookcago
 function useWindowSize() {
@@ -54,13 +56,13 @@ const random_bg = Math.floor((Math.random() * 3) + 1);
 
 const messages = {
     en: {
-        heading:"Overview",
+        heading:"Forecast",
     },
     es: {
-        heading:"Resumen",
+        heading:"Pronóstico",
     },
     fr: {
-        heading:"Résumer",
+        heading:"Prévision",
     }
 };
 
@@ -132,18 +134,34 @@ function App(props) {
 
         <div className="body">
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
+
+                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+                <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
+
+                {/* /////////////////////////////////// */}
+            {/* SETTINGS TAB - TRIGGERED WHEN GEAR ICON IS CLICKED */}
+
+                <Settings trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <div className='settingChoice'>
+                    <div className='settingsText'>App Language: 
                 <select onChange={langChange} defaultValue="{locale}">
                     {['English', 'Spanish', 'French'].map((x) => (
                         <option key={x}>{x}</option>
                     ))}
-                </select>
+                </select></div>
+                <div className='settingsText'>Temp Metric: 
                 <select onChange={unitsChange} defaultValue="{units}">
                     {['Celcius', 'Farenheit'].map((x) => (
                         <option key={x}>{x}</option>
                     ))}
                 </select>
-                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
-                <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
+                </div>
+                    </div>
+                </Settings>
+                <br></br>
+
+                {/* END OF SETTINGS TAB  */}
+
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h1 id='dateText'>
                         <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
