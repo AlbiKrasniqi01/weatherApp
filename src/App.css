@@ -100,6 +100,9 @@ h4 {
   
 }
 
+.SocialMedia {
+  overflow:scroll;
+}
 
 .bottomTab {
   position: absolute;

@@ -4,6 +4,9 @@ import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
 import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
+import SocialMedia from '../../SocialMedia'
+import SocialMediaTab from '../../components/SocialMediaTab/SocialMediaTab';
+
 // import './Forecast.css';
 
 const messages = {
@@ -32,6 +35,8 @@ const Forecast = ({ changeBackground, locale, units }) => {
     let [search, setSearch] = useState('');
     let [mainCity, setMainCity] = useState('');
     let [responseObj, setResponseObj] = useState({});
+    const [buttonPopup, setButtonPopup] = useState(false);
+
 
     useEffect(() => {
         if (locale === "en") {
@@ -136,7 +141,15 @@ const Forecast = ({ changeBackground, locale, units }) => {
                         <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
                     </h2>
                 </IntlProvider>
+                <h2 onClick={() => setButtonPopup(true)}>Posts</h2>
+                {/*SOME SORT OF TAB SYSTEM HERE*/}
+
+                <SocialMediaTab trigger={buttonPopup} setTrigger={setButtonPopup}>
+                {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> : "No Instagram, No cities searched!"}
+                </SocialMediaTab>  
+                              
                 {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
+
             </div>
         </div>
     )

@@ -21,7 +21,7 @@ import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
 import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
-import Moment from 'react-moment';
+import SocialMediaTab from './components/SocialMediaTab/SocialMediaTab';
 
 
 // Hookcago
