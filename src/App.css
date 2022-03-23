@@ -20,6 +20,7 @@
 
 /* Heading CSS  */
 h1 {
+
   font-size: 56px;
   text-shadow: 1px 1px 3px #000000;
 }
@@ -31,8 +32,23 @@ h2 {
 h4 {
   text-shadow: 1px 1px 3px #000000;
 }
-.dateText {
+
+
+/* Text formatting styles  */
+
+p {
+  font-size:15px;
+}
+
+#dateText {
+  font-size: 21px;
   padding: 20px;
+  padding-bottom: 0px;
+  line-height: 5px;
+}
+
+#timeText {
+  font-size: 18px;
   padding-bottom: 2px;
 }
 
@@ -52,13 +68,21 @@ h4 {
   cursor:pointer;
 }
 
-.menuIcon {
-  height: 30px;
-  width: 30px;
+
+.settingsIcon {
+  height: 26px;
+  width: 26px;
+  padding: 3px;
   left: 3px;
   position: absolute;
   cursor:pointer;
 
+}
+
+
+.selectMenu {
+  font-size: 14px;
+  width: 75px;
 }
 
 .fadeBackground {
@@ -78,6 +102,10 @@ h4 {
   position: absolute;
   max-height: 60%;
   width: 100%;
+}
+
+.SocialMedia {
+  overflow:scroll;
 }
 
 .bottomTab {

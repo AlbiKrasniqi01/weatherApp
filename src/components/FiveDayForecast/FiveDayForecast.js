@@ -73,3 +73,4 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units}) => {
 
 export default FiveDayForecast;
  
+ 

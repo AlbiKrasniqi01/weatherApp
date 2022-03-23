@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Conditions from '../Conditions/Conditions';
-import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
-import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
-// import './Forecast.css';
+import SocialMedia from '../../SocialMedia'
 
 const messages = {
     en: {
@@ -130,13 +128,16 @@ const Forecast = ({ changeBackground, locale, units }) => {
                     {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
                 </div>
             </div>
+
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h2>
                         <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
                     </h2>
                 </IntlProvider>
-                {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
+                {/*SOME SORT OF TAB SYSTEM HERE*/}
+                    {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> : "No Instagram, No cities searched!"}
+                    {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
             </div>
         </div>
     )

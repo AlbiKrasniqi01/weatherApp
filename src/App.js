@@ -3,7 +3,7 @@ import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
 import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
-// import Settings from './components/Settings/Settings';
+import Settings2 from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';
 import windy3 from './assets/windy3.jpg';
@@ -19,7 +19,7 @@ import thunder3 from './assets/thunder3.jpg';
 import cloudy1 from './assets/cloudy1.jpg';
 import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
-import menuIcon from './assets/menuicon.png';
+import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
 
 // Hookcago
@@ -143,7 +143,7 @@ function App(props) {
                     ))}
                 </select>
                 <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
-                <img className='menuIcon' src={menuIcon} onClick={() => setButtonPopup(true)}/>
+                <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h1 id='dateText'>
                         <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
