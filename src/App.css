@@ -20,6 +20,8 @@
 
 /* Heading CSS  */
 h1 {
+
+  font-size: 56px;
   text-shadow: 1px 1px 3px #000000;
 }
 
@@ -30,6 +32,7 @@ h2 {
 h4 {
   text-shadow: 1px 1px 3px #000000;
 }
+
 
 /* Text formatting styles  */
 
@@ -61,6 +64,7 @@ h4 {
   cursor:pointer;
 }
 
+
 .settingsIcon {
   height: 26px;
   width: 26px;
@@ -70,6 +74,7 @@ h4 {
   cursor:pointer;
 
 }
+
 
 .selectMenu {
   font-size: 14px;

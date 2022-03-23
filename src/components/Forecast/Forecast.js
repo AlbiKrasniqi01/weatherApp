@@ -3,6 +3,7 @@ import Conditions from '../Conditions/Conditions';
 import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
+import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
 // import './Forecast.css';
 
 const messages = {
@@ -26,11 +27,11 @@ const messages = {
     }
 };
 
-const Forecast = ({ changeBackground, locale }) => {
+const Forecast = ({ changeBackground, locale, units }) => {
 
-   let [search, setSearch] = useState('');
-   let [mainCity, setMainCity] = useState('');
-   let [responseObj, setResponseObj] = useState({});
+    let [search, setSearch] = useState('');
+    let [mainCity, setMainCity] = useState('');
+    let [responseObj, setResponseObj] = useState({});
 
     useEffect(() => {
         if (locale === "en") {
@@ -42,41 +43,41 @@ const Forecast = ({ changeBackground, locale }) => {
         }
     })
 
-   const onSubmit = async(e) => {
-       e.preventDefault()
+    const onSubmit = async(e) => {
+        e.preventDefault()
 
-       if(!search){
-           document.getElementById('forecast').textContent = messages[locale].alertText;
-       }
-       else {
-           var data = await getForecast({search})
-           if (data.count === 0 ) {
-               setMainCity('')
-           } else {
+        if(!search){
+            document.getElementById('forecast').textContent = messages[locale].alertText;
+        }
+        else {
+            var data = await getForecast({search})
+            if (data.count === 0 ) {
+                setMainCity('')
+            } else {
 
-            setResponseObj(data)
-            var removeIt = document.getElementById('tempList');
+                setResponseObj(data)
+                var removeIt = document.getElementById('tempList');
 
-            if (removeIt != null) {
-                removeIt.remove()
-            }
-
-            var t = document.createElement('ul');
-            t.setAttribute('id', 'tempList')
-
-            if (data.count > 1) {
-                for (var i = 0; i < (data.count); i++) {
-                    var listOptions = document.createElement('li');
-                    listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
-                    listOptions.setAttribute('id', i)
-                    listOptions.addEventListener('click', clickList)
-                    t.appendChild(listOptions)
+                if (removeIt != null) {
+                    removeIt.remove()
                 }
-                document.getElementById('wrapper').appendChild(t)
+
+                var t = document.createElement('ul');
+                t.setAttribute('id', 'tempList')
+
+                if (data.count > 1) {
+                    for (var i = 0; i < (data.count); i++) {
+                        var listOptions = document.createElement('li');
+                        listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
+                        listOptions.setAttribute('id', i)
+                        listOptions.addEventListener('click', clickList)
+                        t.appendChild(listOptions)
+                    }
+                    document.getElementById('wrapper').appendChild(t)
+                }
             }
-           }
-       }
-   }
+        }
+    }
 
     function clickList(e){
         setMainCity(e.target.id)
@@ -89,55 +90,56 @@ const Forecast = ({ changeBackground, locale }) => {
     }
 
     function sendBackground(finalRes, finalCity) {
-       changeBackground(finalRes.list[finalCity].weather[0].main)
+        changeBackground(finalRes.list[finalCity].weather[0].main)
     }
 
 
 
-   const getForecast = async() => {
-      //weather data fetch function will go here
-     const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=3&units=metric`, {
-    // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/climate/month/find?q=${search}&units=metric`, {
+    const getForecast = async() => {
+        //weather data fetch function will go here
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=${units}`, {
+            // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
 
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "0bfda3ec6fmshd423ec0929c0787p181fb2jsn85dfe6241ad5"
-	}
-    })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+                "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
+            }
+        })
 
-    const data = await res.json()
-    console.log(data)
-    return data
-   }
+        const data = await res.json()
+        console.log("getForecast:")
+        console.log(data)
+        return data
+    }
 
-       return (
-       <div>
-           <div>
-               <form className="searchBar"  onSubmit={onSubmit}>
-                   <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
-                   <button type="submit" className="submit-button">
-                       <IntlProvider locale={locale} messages={messages[locale]}>
-                               <FormattedMessage id="search" defaultMessage="Overview" value={{locale}}></FormattedMessage>
-                       </IntlProvider>
-                   </button>
-                   <div id="wrapper"></div>
-               </form>
-               <br></br>
-               <div id="forecast">
-                   {mainCity != '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale}/> : <div className="loader"></div> }
-               </div>
-          </div>
-           <div className='bottomTab'>
-               <IntlProvider locale={locale} messages={messages[locale]}>
-               <h2>
-                   <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
-               </h2>
-               </IntlProvider>
-               <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} />
-           </div>
-       </div>
-   )
+    return (
+        <div>
+            <div>
+                <form className="searchBar"  onSubmit={onSubmit}>
+                    <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
+                    <button type="submit" className="submit-button">
+                        <IntlProvider locale={locale} messages={messages[locale]}>
+                            <FormattedMessage id="search" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+                        </IntlProvider>
+                    </button>
+                    <div id="wrapper"></div>
+                </form>
+                <br></br>
+                <div id="forecast">
+                    {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
+                </div>
+            </div>
+            <div className='bottomTab'>
+                <IntlProvider locale={locale} messages={messages[locale]}>
+                    <h2>
+                        <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+                    </h2>
+                </IntlProvider>
+                {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
+            </div>
+        </div>
+    )
 }
 
 export default Forecast;
