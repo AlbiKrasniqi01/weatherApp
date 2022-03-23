@@ -26,6 +26,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
             document.getElementById('photo').src = `${snowicon}`
         }
 
+
         if (langSet !== locale) {
             setLangSet(locale)
             getLanguage()
@@ -60,11 +61,13 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
     }
 
     const getSpecificForecast = async(language) => {
+
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${language}&units=${units}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
                 "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
+
             }
         })
 

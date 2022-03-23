@@ -1,0 +1,49 @@
+.popup{
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    max-height: 30%;
+    background-color: rgba(204, 204, 204, 1);
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    z-index: 1000;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+
+}
+
+.settingChoice {
+    
+}
+
+.close-btn {
+    position: relative;
+    display: inline;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.LanguageForm {
+    color: white;
+    position: relative;
+    width: -1px;
+    max-width: 640px;
+    -webkit-filter: drop-shadow(1px 1px 3px #000000);
+    filter: drop-shadow(1px 1px 3px #000000);
+}
+
+.TempForm {
+    color: white;
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    -webkit-filter: drop-shadow(1px 1px 3px #000000);
+    filter: drop-shadow(1px 1px 3px #000000);
+}
+
+.button-close {
+    font-size: 16px;
+    margin: 10px;
+    margin-top: 5px;
+}
