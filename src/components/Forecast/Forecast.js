@@ -96,8 +96,8 @@ const Forecast = ({ changeBackground, locale }) => {
 
    const getForecast = async() => {
       //weather data fetch function will go here
-     const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
-    // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
+     const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=3&units=metric`, {
+    // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/climate/month/find?q=${search}&units=metric`, {
 
 	"method": "GET",
 	"headers": {

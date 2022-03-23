@@ -19,13 +19,9 @@ const FiveDayForecast = ({responseObj, mainCity, locale}) => {
 
     // let [mainCity, setMainCity] = useState('');
     // let [responseObj, setResponseObj] = useState({});
-
-
-    const getFiveDayForecast = async() => {
-                        //   fetch('https://community-open-weather-map.p.rapidapi.com/forecast/daily?lat=35&lon=139&cnt=5&units=metric', options)
+        const getFiveDayForecast = async() => {
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/climate/month?q=london%2Cuk&units=metric`, {
                          
-        // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${mainCity}&cnt=5&units=metric`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
@@ -42,6 +38,18 @@ const FiveDayForecast = ({responseObj, mainCity, locale}) => {
    return (
        <div>
            <div>
+               {/* {responseObj.map((item, index) => {
+                   <ul key={index}>
+                   <li>
+                       {dayjs(item.dt_txt).format('dddd')}
+                       <div>{item.forecastIcon}></div>
+                     </span>
+                     <span className="flex-1 text-right">
+                       {item.min}&deg; / {item.max}&deg;
+                     </span>
+                   </li>
+                 </ul>
+               } */}
                <IntlProvider locale={locale} messages={messages[locale]}>
                </IntlProvider>
                <div className="five_forecast">
