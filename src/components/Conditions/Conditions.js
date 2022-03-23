@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import sunnyicon from '../../assets/sunnyicon.png';
 import cloudyicon from '../../assets/cloudyicon.png';
-import rainyicon from '../../assets/rainyicon.png'; 
-import windyicon from '../../assets/windyicon.png'; 
+import rainyicon from '../../assets/rainyicon.png';
+import windyicon from '../../assets/windyicon.png';
 import snowicon from '../../assets/snowicon.png';
 
-const Conditions = ({ responseObj, mainCity, sendBackground, locale }) => {
+const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) => {
+
+    let [langSet, setLangSet] = useState ('en')
+    let [unitsSet, setUnitsSet] = useState ('metric');
 
     sendBackground(responseObj, mainCity)
 
@@ -22,8 +25,27 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale }) => {
         } else if (type === "Snow") {
             document.getElementById('photo').src = `${snowicon}`
         }
-        getLanguage()
+
+        if (langSet !== locale) {
+            setLangSet(locale)
+            getLanguage()
+        }
+
+        if (unitsSet !== units) {
+            setUnitsSet(units)
+            getNewUnits()
+        }
     })
+
+    const getNewUnits = async() => {
+        if (units === "metric") {
+            var data = await getSpecificForecast()
+            document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°C"
+        } else if (units === "imperial") {
+            var data = await getSpecificForecast()
+            document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°F"
+        }
+    }
 
     const getLanguage = async() => {
         if (locale === "es") {
@@ -38,15 +60,16 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale }) => {
     }
 
     const getSpecificForecast = async(language) => {
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${language}`, {
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${language}&units=${units}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                "x-rapidapi-key": "3caec1c9f0mshab6fd9e79acda91p10cd03jsn665791528a22"
+                "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
             }
         })
 
         const data = await res.json()
+        console.log("getSpecificForecast:")
         console.log(data)
         return data
     }
@@ -56,8 +79,8 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale }) => {
             <div className='fadeBackground'>
                 <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
                 <h1 id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
-                <img id='photo' src={sunnyicon}/>
-                <h2 id='description'>{responseObj.list[mainCity].weather[0].description}</h2>
+                <img id='photo'/>
+                <h4 id='description'>{responseObj.list[mainCity].weather[0].description}</h4>
             </div>
         </div>
     )
