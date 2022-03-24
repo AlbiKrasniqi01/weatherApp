@@ -1,7 +1,7 @@
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
-import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
+import { IntlProvider, FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';

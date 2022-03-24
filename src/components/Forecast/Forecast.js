@@ -144,11 +144,15 @@ const Forecast = ({ changeBackground, locale, units }) => {
             </div>
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
-                    <h2>
+                    <h2 className='tabTitleText'>
+                    <div className='tabTitleWords'>
                         <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
+                        </div>
                     </h2>
-                    <h2 onClick={() => setButtonPopup(true)}>
+                    <h2 className='tabTitleText' onClick={() => setButtonPopup(true)}>
+                        <div className='tabTitleWords'>
                         <FormattedMessage id="posts" defaultMessage="Posts" value={{locale}}></FormattedMessage>
+                        </div>
                     </h2>
                 </IntlProvider>
                 {/*SOME SORT OF TAB SYSTEM HERE*/}

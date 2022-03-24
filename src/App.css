@@ -101,7 +101,6 @@ body {
   height: 30%;
   min-height: 20%;
   bottom: 0px;
-  /* background-color: hsla(0, 0%, 100%, 0.85); */
   background-color: rgba(255, 255, 255, 0.2);
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
@@ -109,21 +108,31 @@ body {
 }
 
 .tabTitleText {
+  /* background-color: rgba(255, 255, 255, 0.4); */
   font-size: 20px;
   color: #282c34;
   display: inline-block;
   margin: auto;
+  margin-bottom: 5px;
   width: 50%;
   padding: 0px;
-  padding-top: 15px;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.tabTitleWords {
+  width: 80%;
+  margin: auto;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
 }
 /* ----------------------- */ 
 
 /* BOTTOM TAB - FIVEDAY FORECAST STYLING */
 
 .forecastRow {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #383838;
   width: 85%;
   margin: auto;
@@ -134,16 +143,15 @@ body {
   border-style: solid;
 }
 
-#fiveDayTemp {
+.fiveDayTemp {
   display: inline;
   font-size: 18px;
 }
 
-.fiveDayNumerical {
-  font-size: 26px;
+.fiveDayNumTemp {
   display: inline;
-  position: absolute;
-  right: 5px;
+  font-size: 24px;
+  
 }
 /* ----------------------- */ 
 
