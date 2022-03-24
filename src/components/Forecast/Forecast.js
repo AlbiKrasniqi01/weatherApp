@@ -6,8 +6,7 @@ import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
 import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
 import SocialMedia from '../../SocialMedia'
 import SocialMediaTab from '../../components/SocialMediaTab/SocialMediaTab';
-
-// import './Forecast.css';
+import './Forecast.css';
 
 const messages = {
     en: {
