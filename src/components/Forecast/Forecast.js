@@ -1,27 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import Conditions from '../Conditions/Conditions';
+import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
+import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
 import SocialMedia from '../../SocialMedia'
+import SocialMediaTab from '../../components/SocialMediaTab/SocialMediaTab';
+
+// import './Forecast.css';
 
 const messages = {
     en: {
         noSearch:"No Cities Searched",
         alertText:"Please enter a location.",
-        heading:"Overview",
+        heading:"Forecast",
         search:"Search",
+        posts:"Posts",
+        noPosts:"No posts!",
     },
     es: {
         noSearch:"No se han buscado ciudades",
         alertText:"Por favor ingrese una ubicación",
-        heading:"Resumen",
+        heading:"Pronóstico",
         search:"Búsqueda",
+        posts:"Publicaciones",
+        noPosts:"Sin publicaciones!",
     },
     fr: {
         noSearch:"Aucune ville recherchée",
         alertText:"Veuillez saisir un lieu",
-        heading:"Résumer",
+        heading:"Prévision",
         search:"Chercher",
+        posts:"Des Postes",
+        noPosts:"Pas de messages!",
     }
 };
 
@@ -30,6 +41,9 @@ const Forecast = ({ changeBackground, locale, units }) => {
     let [search, setSearch] = useState('');
     let [mainCity, setMainCity] = useState('');
     let [responseObj, setResponseObj] = useState({});
+    const [buttonPopup, setButtonPopup] = useState(false);
+    let [check, setCheck] = useState(0);
+
 
     useEffect(() => {
         if (locale === "en") {
@@ -79,6 +93,8 @@ const Forecast = ({ changeBackground, locale, units }) => {
 
     function clickList(e){
         setMainCity(e.target.id)
+        setCheck(check + 1)
+        console.log(check)
 
         var removeIt = document.getElementById('tempList');
         if (removeIt != null) {
@@ -95,8 +111,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
 
     const getForecast = async() => {
         //weather data fetch function will go here
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=${units}`, {
-            // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=6&units=${units}`, {
 
             "method": "GET",
             "headers": {
@@ -128,16 +143,33 @@ const Forecast = ({ changeBackground, locale, units }) => {
                     {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
                 </div>
             </div>
-
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h2>
-                        <FormattedMessage id="heading" defaultMessage="Overview" value={{locale}}></FormattedMessage>
+                        <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
+                    </h2>
+                    <h2 onClick={() => setButtonPopup(true)}>
+                        <FormattedMessage id="posts" defaultMessage="Posts" value={{locale}}></FormattedMessage>
                     </h2>
                 </IntlProvider>
                 {/*SOME SORT OF TAB SYSTEM HERE*/}
-                    {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> : "No Instagram, No cities searched!"}
-                    {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
+
+                <SocialMediaTab trigger={buttonPopup} setTrigger={setButtonPopup}>
+                {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> :
+                    <IntlProvider locale={locale} messages={messages[locale]}>
+                        <p>
+                            <FormattedMessage id="noPosts" defaultMessage="No posts!" value={{locale}}></FormattedMessage>
+                        </p>
+                    </IntlProvider>}
+                </SocialMediaTab>  
+                              
+                {mainCity !== '' ? <FiveDayForecast check = {check} responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> :
+                    <IntlProvider locale={locale} messages={messages[locale]}>
+                    <p>
+                        <FormattedMessage id="noSearch" defaultMessage="No cities searched!" value={{locale}}></FormattedMessage>
+                    </p>
+                    </IntlProvider>}
+
             </div>
         </div>
     )

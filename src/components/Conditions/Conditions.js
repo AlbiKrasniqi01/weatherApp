@@ -26,7 +26,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
             document.getElementById('photo').src = `${snowicon}`
         }
 
-        if (langSet !== locale) {
+        if ( langSet !== locale ) {
             setLangSet(locale)
             getLanguage()
         }
@@ -59,12 +59,14 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
         }
     }
 
-    const getSpecificForecast = async(language) => {
-        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${language}&units=${units}`, {
+    const getSpecificForecast = async() => {
+
+        const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${locale}&units=${units}`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
                 "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
+
             }
         })
 
@@ -79,7 +81,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
             <div className='fadeBackground'>
                 <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
                 <h1 id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
-                <img id='photo'/>
+                <img id='photo' src={sunnyicon} />
                 <h4 id='description'>{responseObj.list[mainCity].weather[0].description}</h4>
             </div>
         </div>

@@ -2,8 +2,8 @@ import refreshicon from './assets/refreshicon.png'; // with import
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
-import { IntlProvider, FormattedDate, FormattedTime } from 'react-intl';
-import Settings2 from './components/Settings/Settings';
+import {IntlProvider, FormattedDate, FormattedTime, FormattedMessage} from 'react-intl';
+import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';
 import windy3 from './assets/windy3.jpg';
@@ -21,6 +21,8 @@ import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
 import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
+import SocialMediaTab from './components/SocialMediaTab/SocialMediaTab';
+
 
 // Hookcago
 function useWindowSize() {
@@ -54,23 +56,49 @@ const random_bg = Math.floor((Math.random() * 3) + 1);
 
 const messages = {
     en: {
-        heading:"Overview",
+        heading:"Forecast",
+        langSettings:"App Language:",
+        tempSettings:"Temperature Metric:"
     },
     es: {
-        heading:"Resumen",
+        heading: "Pronóstico",
+        langSettings: "Langue de l'application:",
+        tempSettings:"Métrica de temperatura:",
     },
     fr: {
-        heading:"Résumer",
-    }
+        heading: "Prévision",
+        langSettings: "Idioma de la aplicación:",
+        tempSettings:"Mesure de la température:",
+    },
 };
 
+const langSettings = [
+    [
+        "English",
+        "Spanish",
+        "French",
+    ],
+    [
+        "Inglesa",
+        "Espagnol",
+        "Francés",
+    ],
+    [
+        "Anglais",
+        "Espagnol",
+        "Français",
+    ]
+]
 
 function App(props) {
 
     const size = useWindowSize()
     const [locale, setLocale] = useState('en')
+    const [dateTime, setDateTime] = useState('English')
+    const [temp, setTemp] = useState('Celcius')
     const [buttonPopup, setButtonPopup] = useState(false);
     const [units, setUnits] = useState('metric')
+    const [langSet, setLangSet] = useState(0);
 
     function changeBackground(weatherType) {
         if (weatherType === "Clear") {
@@ -111,16 +139,23 @@ function App(props) {
     }
 
     const langChange = (e) => {
-        if (e.target.value === "English"){
+        if (e.target.value === "English" || e.target.value === "Inglesa" || e.target.value === "Anglais"){
             setLocale('en')
-        } else if (e.target.value === "Spanish") {
+            setLangSet(0)
+            setDateTime(langSettings[0][0])
+        } else if (e.target.value === "Spanish" || e.target.value === "Espagnol") {
             setLocale('es')
-        } else if (e.target.value === "French") {
+            setLangSet(1)
+            setDateTime(langSettings[1][1])
+        } else if (e.target.value === "French" || e.target.value === "Francés" || e.target.value === "Français") {
             setLocale('fr')
+            setLangSet(2)
+            setDateTime(langSettings[2][2])
         }
     }
 
     const unitsChange = (e) => {
+        setTemp(e.target.value)
         if (e.target.value === "Celcius"){
             setUnits('metric')
         } else if (e.target.value === "Farenheit") {
@@ -132,18 +167,43 @@ function App(props) {
 
         <div className="body">
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-                <select onChange={langChange} defaultValue="{locale}">
-                    {['English', 'Spanish', 'French'].map((x) => (
-                        <option key={x}>{x}</option>
-                    ))}
-                </select>
-                <select onChange={unitsChange} defaultValue="{units}">
+                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+                <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
+
+                {/* /////////////////////////////////// */}
+            {/* SETTINGS TAB - TRIGGERED WHEN GEAR ICON IS CLICKED */}
+
+                <Settings trigger={buttonPopup} setTrigger={setButtonPopup} locale = {locale}>
+                <div className='settingChoice'>
+                    <div className='settingsText'>
+                        <IntlProvider locale={locale} messages={messages[locale]}>
+                            <>
+                                <FormattedMessage id="langSettings" defaultMessage="App Language:" value={{locale}}></FormattedMessage>
+                            </>
+                        </IntlProvider>
+                            <select onChange={langChange} value = {dateTime}>
+                                {langSettings[langSet].map((x) => (
+                                    <option key={x}>{x}</option>
+                                ))}
+                            </select>
+                    </div>
+                <div className='settingsText'><IntlProvider locale={locale} messages={messages[locale]}>
+                    <>
+                        <FormattedMessage id="tempSettings" defaultMessage="Temperature Metric:" value={{locale}}></FormattedMessage>
+                    </>
+                </IntlProvider>
+                <select onChange={unitsChange} defaultValue={temp}>
                     {['Celcius', 'Farenheit'].map((x) => (
                         <option key={x}>{x}</option>
                     ))}
                 </select>
-                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
-                <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
+                </div>
+                    </div>
+                </Settings>
+                <br></br>
+
+                {/* END OF SETTINGS TAB  */}
+
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h1 id='dateText'>
                         <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
