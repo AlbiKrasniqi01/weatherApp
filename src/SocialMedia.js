@@ -19,7 +19,9 @@ const SocialMedia = ({ responseObj, mainCity }) => {
             "method": "GET",
             "headers": {
                 'X-RapidAPI-Host': 'InstagramdimashirokovV1.p.rapidapi.com',
-                'X-RapidAPI-Key': '0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794'
+                // 'X-RapidAPI-Key': '0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794'
+                'X-RapidAPI-Key': '8ea10601demshe52e0c1fc900b69p10293ejsnde41c0274d78'
+
             }
         })
 
@@ -56,19 +58,23 @@ const SocialMedia = ({ responseObj, mainCity }) => {
 
     return (
             <div className='SocialMedia'>
-                <button onClick={getPosts} >Check Instagram</button>
-                <p>Here is whats popping on the gram for {responseObj.list[mainCity].name}</p>
+                <button className="instagramBtn" onClick={getPosts} >Check Instagram</button>
+                {/* <p>Here is whats popping on the gram for {responseObj.list[mainCity].name}</p> */}
+                <p className="postsIntroText">Top posts from {responseObj.list[mainCity].name}!</p>
                 {gettem === true ?
-                    data.map(post => (
+                    data.map(post => (                
+                    <div className='igTopPosts'>
+
                             <ol key={post["node"]["id"]}>
-                                <p>Username: {post["node"]["__typename"]}</p>
+                                <p className="usernameText">Username: {post["node"]["__typename"]}</p>
                                 {/* cros error when uploading images */}
-                                <img id={post["node"]["id"]} src={post["node"]["thumbnail_src"]} width="150" height="150" />
-                                <p>{post["node"]["accessibility_caption"]}</p>
-                            </ol>
+                                <img id={post["node"]["id"]} src={post["node"]["thumbnail_src"]} width="100" height="100" />
+                                {/* <p>{post["node"]["accessibility_caption"]}</p> */}
+                            </ol>            </div>
+
                         )) :
                 "No posts" }
-            </div>
+                </div>
         )
 }
 

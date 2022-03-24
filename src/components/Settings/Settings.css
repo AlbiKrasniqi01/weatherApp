@@ -7,7 +7,7 @@
     background-color: rgba(204, 204, 204, 1);
     display: flex;
     justify-content: center;
-    z-index: 1000;
+    z-index: 1000000;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
 

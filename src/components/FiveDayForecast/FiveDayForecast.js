@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FiveDayConditions from '../FiveDayConditions/FiveDayConditions';
 import { IntlProvider, FormattedMessage } from 'react-intl';
-import sunnyicon from "../../assets/sunnyicon.png";
-import cloudyicon from "../../assets/cloudyicon.png";
-import rainyicon from "../../assets/rainyicon.png";
-import windyicon from "../../assets/windyicon.png";
-import snowicon from "../../assets/snowicon.png";
 
 const messages = {
     en: {

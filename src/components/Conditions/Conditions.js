@@ -80,7 +80,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
     return (
         <div>
             <div className='fadeBackground'>
-                <h2>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
+                <h2 id='cityName'>{responseObj.list[mainCity].name}, {responseObj.list[mainCity].sys.country}</h2>
                 <h1 id='temperature'>{Math.round(responseObj.list[mainCity].main.temp)}°C </h1>
                 <img id='photo'/>
                 <h4 id='description'>{responseObj.list[mainCity].weather[0].description}</h4>

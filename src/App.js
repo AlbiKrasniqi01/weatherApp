@@ -1,4 +1,3 @@
-import refreshicon from './assets/refreshicon.png'; // with import
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
@@ -19,6 +18,10 @@ import thunder3 from './assets/thunder3.jpg';
 import cloudy1 from './assets/cloudy1.jpg';
 import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
+import snowy1 from './assets/snowy1.jpg';
+import snowy2 from './assets/snowy2.jpg';
+import snowy3 from './assets/snowy3.jpg';
+import refreshicon from './assets/refreshicon.png'; 
 import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
 import SocialMediaTab from './components/SocialMediaTab/SocialMediaTab';
@@ -93,7 +96,7 @@ function App(props) {
             } else if (random_bg === 3) {
                 document.getElementById('App').style.background = `url(${cloudy3})`
             }
-        } else if (weatherType === "Rain") {
+        } else if (weatherType === "Rain" || weatherType === "Drizzle") {
             if (random_bg === 1) {
                 document.getElementById('App').style.background = `url(${rainy1})`
             } else if (random_bg === 2) {
@@ -101,7 +104,7 @@ function App(props) {
             } else if (random_bg === 3) {
                 document.getElementById('App').style.background = `url(${rainy3})`
             }
-        } else if (weatherType === "Storm") {
+        } else if (weatherType === "Thunderstorm") {
             if (random_bg === 1) {
                 document.getElementById('App').style.background = `url(${thunder1})`
             } else if (random_bg === 2) {
@@ -110,7 +113,24 @@ function App(props) {
                 document.getElementById('App').style.background = `url(${thunder3})`
             }
         }
-    }
+
+        else if (weatherType === "Snow") {
+            if (random_bg === 1) {
+                document.getElementById('App').style.background = `url(${snowy1})`
+            } else if (random_bg === 2) {
+                document.getElementById('App').style.background = `url(${snowy2})`
+            } else if (random_bg === 3) {
+                document.getElementById('App').style.background = `url(${snowy3})`
+            }
+        } else{
+            if (random_bg === 1) {
+                document.getElementById('App').style.background = `url(${windy1})`
+            } else if (random_bg === 2) {
+                document.getElementById('App').style.background = `url(${windy2})`
+            } else if (random_bg === 3) {
+                document.getElementById('App').style.background = `url(${windy3})`
+            }
+    } }
 
     const langChange = (e) => {
         if (e.target.value === "English"){
