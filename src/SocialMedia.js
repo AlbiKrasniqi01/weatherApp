@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 const SocialMedia = ({ responseObj, mainCity }) => {
 
     const MAXPOSTS = 3
@@ -60,7 +61,7 @@ const SocialMedia = ({ responseObj, mainCity }) => {
             <div className='SocialMedia'>
                 <button className="instagramBtn" onClick={getPosts} >Check Instagram</button>
                 {/* <p>Here is whats popping on the gram for {responseObj.list[mainCity].name}</p> */}
-                <p className="postsIntroText">Top posts from {responseObj.list[mainCity].name}!</p>
+                <p className="postsIntroText" style = {{width: "352px"}}>Top posts from {responseObj.list[mainCity].name}!</p>
                 {gettem === true ?
                     data.map(post => (                
                     <div className='igTopPosts'>
