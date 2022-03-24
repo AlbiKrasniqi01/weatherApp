@@ -76,6 +76,10 @@ h4 {
 
 }
 
+.settingsText {
+  font-family: "Montserrat", sans-serif;
+}
+
 
 .selectMenu {
   font-size: 14px;
@@ -110,7 +114,8 @@ h4 {
   height: 30%;
   min-height: 20%;
   bottom: 0px;
-  background-color: hsla(0, 0%, 100%, 0.85);
+ /* background-color: hsla(0, 0%, 100%, 0.85);  Changed the background color so it blends in with the background image*/
+ background-color: rgba(255, 255, 255, 0.2);  /* This is the changed background color*/
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   font-size: 24px;
@@ -139,7 +144,7 @@ h4 {
 }
 
 .forecastRow {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.2); /*Changed the color form white so the text is more visible */
   width: 85%;
   margin: auto;
   margin-bottom: 2px;
@@ -198,4 +203,8 @@ h4 {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.body {
+  font-family: "Montserrat", sans-serif;
 }
