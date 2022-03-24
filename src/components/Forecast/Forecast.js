@@ -13,18 +13,24 @@ const messages = {
         alertText:"Please enter a location.",
         heading:"Forecast",
         search:"Search",
+        posts:"Posts",
+        noPosts:"No posts!",
     },
     es: {
         noSearch:"No se han buscado ciudades",
         alertText:"Por favor ingrese una ubicación",
         heading:"Pronóstico",
         search:"Búsqueda",
+        posts:"Publicaciones",
+        noPosts:"Sin publicaciones!",
     },
     fr: {
         noSearch:"Aucune ville recherchée",
         alertText:"Veuillez saisir un lieu",
         heading:"Prévision",
         search:"Chercher",
+        posts:"Des Postes",
+        noPosts:"Pas de messages!",
     }
 };
 
@@ -34,6 +40,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
     let [mainCity, setMainCity] = useState('');
     let [responseObj, setResponseObj] = useState({});
     const [buttonPopup, setButtonPopup] = useState(false);
+    let [check, setCheck] = useState(0);
 
 
     useEffect(() => {
@@ -84,6 +91,8 @@ const Forecast = ({ changeBackground, locale, units }) => {
 
     function clickList(e){
         setMainCity(e.target.id)
+        setCheck(check + 1)
+        console.log(check)
 
         var removeIt = document.getElementById('tempList');
         if (removeIt != null) {
@@ -135,20 +144,30 @@ const Forecast = ({ changeBackground, locale, units }) => {
             </div>
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
-                    <h2 className='tabTitleText'>
+                    <h2>
                         <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
-                    
+                    </h2>
+                    <h2 onClick={() => setButtonPopup(true)}>
+                        <FormattedMessage id="posts" defaultMessage="Posts" value={{locale}}></FormattedMessage>
                     </h2>
                 </IntlProvider>
-                
-                <h2 className="tabTitleText" onClick={() => setButtonPopup(true)}>Posts</h2>
                 {/*SOME SORT OF TAB SYSTEM HERE*/}
+
                 <SocialMediaTab trigger={buttonPopup} setTrigger={setButtonPopup}>
-                
-                {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> : "No Instagram, No cities searched!"}
+                {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> :
+                    <IntlProvider locale={locale} messages={messages[locale]}>
+                        <p>
+                            <FormattedMessage id="noPosts" defaultMessage="No posts!" value={{locale}}></FormattedMessage>
+                        </p>
+                    </IntlProvider>}
                 </SocialMediaTab>  
                               
-                {mainCity !== '' ? <FiveDayForecast responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> : "No cities searched!"}
+                {mainCity !== '' ? <FiveDayForecast check = {check} responseObj = {responseObj} mainCity = {mainCity} locale = {locale} units = {units} /> :
+                    <IntlProvider locale={locale} messages={messages[locale]}>
+                    <p>
+                        <FormattedMessage id="noSearch" defaultMessage="No cities searched!" value={{locale}}></FormattedMessage>
+                    </p>
+                    </IntlProvider>}
 
             </div>
         </div>

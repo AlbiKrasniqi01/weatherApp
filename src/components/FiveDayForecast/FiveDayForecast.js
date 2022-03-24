@@ -17,12 +17,13 @@ const messages = {
 const FiveDayForecast = ({responseObj, mainCity, locale, units}) => {
 
     let [fiveDay, setFiveDay] = useState('');
-    let [id, setId] = useState(responseObj.list[mainCity].id);
     let [unitsSet, setUnitsSet] = useState ('metric');
+    let [checkUpdate, setCheckUpdate] = useState(0);
 
     useEffect(() => {
-        if (fiveDay === '') {
-            getFiveDayForecast()
+        if (check !== checkUpdate) {
+            setCheckUpdate(check)
+            getFiveDayForecast(responseObj.list[mainCity].id)
         }
 
         if (unitsSet !== units) {

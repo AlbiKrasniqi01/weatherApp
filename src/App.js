@@ -60,22 +60,48 @@ const random_bg = Math.floor((Math.random() * 3) + 1);
 const messages = {
     en: {
         heading:"Forecast",
+        langSettings:"App Language:",
+        tempSettings:"Temperature Metric:"
     },
     es: {
-        heading:"Pronóstico",
+        heading: "Pronóstico",
+        langSettings: "Langue de l'application:",
+        tempSettings:"Métrica de temperatura:",
     },
     fr: {
-        heading:"Prévision",
-    }
+        heading: "Prévision",
+        langSettings: "Idioma de la aplicación:",
+        tempSettings:"Mesure de la température:",
+    },
 };
 
+const langSettings = [
+    [
+        "English",
+        "Spanish",
+        "French",
+    ],
+    [
+        "Inglesa",
+        "Espagnol",
+        "Francés",
+    ],
+    [
+        "Anglais",
+        "Espagnol",
+        "Français",
+    ]
+]
 
 function App(props) {
 
     const size = useWindowSize()
     const [locale, setLocale] = useState('en')
+    const [dateTime, setDateTime] = useState('English')
+    const [temp, setTemp] = useState('Celcius')
     const [buttonPopup, setButtonPopup] = useState(false);
     const [units, setUnits] = useState('metric')
+    const [langSet, setLangSet] = useState(0);
 
     function changeBackground(weatherType) {
         if (weatherType === "Clear") {
@@ -133,16 +159,23 @@ function App(props) {
     } }
 
     const langChange = (e) => {
-        if (e.target.value === "English"){
+        if (e.target.value === "English" || e.target.value === "Inglesa" || e.target.value === "Anglais"){
             setLocale('en')
-        } else if (e.target.value === "Spanish") {
+            setLangSet(0)
+            setDateTime(langSettings[0][0])
+        } else if (e.target.value === "Spanish" || e.target.value === "Espagnol") {
             setLocale('es')
-        } else if (e.target.value === "French") {
+            setLangSet(1)
+            setDateTime(langSettings[1][1])
+        } else if (e.target.value === "French" || e.target.value === "Francés" || e.target.value === "Français") {
             setLocale('fr')
+            setLangSet(2)
+            setDateTime(langSettings[2][2])
         }
     }
 
     const unitsChange = (e) => {
+        setTemp(e.target.value)
         if (e.target.value === "Celcius"){
             setUnits('metric')
         } else if (e.target.value === "Farenheit") {
@@ -161,16 +194,26 @@ function App(props) {
                 {/* /////////////////////////////////// */}
             {/* SETTINGS TAB - TRIGGERED WHEN GEAR ICON IS CLICKED */}
 
-                <Settings trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <Settings trigger={buttonPopup} setTrigger={setButtonPopup} locale = {locale}>
                 <div className='settingChoice'>
-                    <div className='settingsText'>App Language: 
-                <select onChange={langChange} defaultValue="{locale}">
-                    {['English', 'Spanish', 'French'].map((x) => (
-                        <option key={x}>{x}</option>
-                    ))}
-                </select></div>
-                <div className='settingsText'>Temp Metric: 
-                <select onChange={unitsChange} defaultValue="{units}">
+                    <div className='settingsText'>
+                        <IntlProvider locale={locale} messages={messages[locale]}>
+                            <>
+                                <FormattedMessage id="langSettings" defaultMessage="App Language:" value={{locale}}></FormattedMessage>
+                            </>
+                        </IntlProvider>
+                            <select onChange={langChange} value = {dateTime}>
+                                {langSettings[langSet].map((x) => (
+                                    <option key={x}>{x}</option>
+                                ))}
+                            </select>
+                    </div>
+                <div className='settingsText'><IntlProvider locale={locale} messages={messages[locale]}>
+                    <>
+                        <FormattedMessage id="tempSettings" defaultMessage="Temperature Metric:" value={{locale}}></FormattedMessage>
+                    </>
+                </IntlProvider>
+                <select onChange={unitsChange} defaultValue={temp}>
                     {['Celcius', 'Farenheit'].map((x) => (
                         <option key={x}>{x}</option>
                     ))}
