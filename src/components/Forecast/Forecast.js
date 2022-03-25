@@ -9,6 +9,8 @@ import './Forecast.css';
 import refreshicon from "../../assets/refreshicon.png";
 
 
+// Variable values by language
+
 const messages = {
     en: {
         noSearch:"No Cities Searched",
@@ -36,15 +38,15 @@ const messages = {
     }
 };
 
+// Main weather forecasting component
 const Forecast = ({ changeBackground, locale, units }) => {
 
-    let [search, setSearch] = useState('');
-    let [mainCity, setMainCity] = useState('');
-    let [responseObj, setResponseObj] = useState({});
-    const [buttonPopup, setButtonPopup] = useState(false);
-    let [check, setCheck] = useState(0);
-
-
+    let [search, setSearch] = useState('');                 //     Search value
+    let [mainCity, setMainCity] = useState('');             //     Position in array of cities that is select
+    let [responseObj, setResponseObj] = useState({});       //     Array of cities returned from API
+    const [buttonPopup, setButtonPopup] = useState(false);  //     Button value for Social Media Tab
+    let [check, setCheck] = useState(0);                    /*     Variable used to check if a successful search has gone through for components to update
+                                                                            Checks for error codes (API overload, Bad request) and variable array length                                                                                     */
     useEffect(() => {
         if (locale === "en") {
             document.getElementById('searchInput').placeholder = "Search Cities"
@@ -55,6 +57,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
         }
     })
 
+    // Main function triggered by submission
     const onSubmit = async(e) => {
         e.preventDefault()
 
@@ -95,6 +98,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
         }
     }
 
+    // Function triggered when list of cities are selected
     function clickList(e){
         setMainCity(e.target.id)
         setCheck(check + 1)
@@ -106,10 +110,12 @@ const Forecast = ({ changeBackground, locale, units }) => {
         }
     }
 
+    // Sends final city array value to App.js to update background
     function sendBackground(finalRes, finalCity) {
         changeBackground(finalRes.list[finalCity].weather[0].main)
     }
 
+    // Used to reload page on an API error aswell as reload forecast if one is searched
     const reloadButton = async() => {
         var ch = document.getElementById('forecast').textContent
         if ( ch === 'API is overloaded, reload page and try again' || JSON.stringify(responseObj) === '{}' ) {
@@ -119,7 +125,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
         }
     }
 
-
+    // Main API call
     const getForecast = async() => {
         //weather data fetch function will go here
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=6&units=${units}`, {
@@ -132,7 +138,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
             }
         })
 
-
+        // Checks for API overload
         if (res.status === 429) {
             setMainCity('');
             document.getElementById('forecast').textContent = 'API is overloaded, reload page and try again'
@@ -158,9 +164,11 @@ const Forecast = ({ changeBackground, locale, units }) => {
                             <FormattedMessage id="search" defaultMessage="Overview" value={{locale}}></FormattedMessage>
                         </IntlProvider>
                     </button>
+                    {/*CITIES ARRAY SELECT MENU*/}
                     <div id="wrapper"></div>
                 </form>
                 <br></br>
+                {/*MAIN FORECAST HERE*/}
                 <div id="forecast">
                     {mainCity !== '' ? <Conditions check={check} responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
                 </div>
@@ -178,7 +186,7 @@ const Forecast = ({ changeBackground, locale, units }) => {
                         </div>
                     </h2>
                 </IntlProvider>
-                {/*SOME SORT OF TAB SYSTEM HERE*/}
+                {/*TAB SYSTEM HERE*/}
 
                 <SocialMediaTab trigger={buttonPopup} setTrigger={setButtonPopup}>
                 {mainCity !== '' ? <SocialMedia responseObj={responseObj} mainCity = {mainCity} /> :

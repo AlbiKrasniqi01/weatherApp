@@ -87,7 +87,7 @@ const messages = {
 
 const FiveDayForecast = ({responseObj, mainCity, locale, units, check}) => {
 
-    let [fiveDay, setFiveDay] = useState('');
+    let [fiveDay, setFiveDay] = useState('');               // Five Day forecast array
     let [unitsSet, setUnitsSet] = useState ('metric');
     let [checkUpdate, setCheckUpdate] = useState(0);
 
@@ -111,6 +111,7 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units, check}) => {
         }
     }
 
+    // Different API call to find forecast for next 5 days
     const getFiveDayForecast = async(id) => {
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?cnt=6&units=${units}&id=${id}`, {
             "method": "GET",

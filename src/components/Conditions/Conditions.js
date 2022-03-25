@@ -5,17 +5,19 @@ import rainyicon from '../../assets/rainyicon.png';
 import windyicon from '../../assets/windyicon.png';
 import snowicon from '../../assets/snowicon.png';
 
+
+// Main Forecast value
 const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, check }) => {
 
     let [langSet, setLangSet] = useState ('en')
     let [unitsSet, setUnitsSet] = useState ('metric');
     let [checkUpdate, setCheckUpdate] = useState(0);
 
-
-
     useEffect(() => {
         if (checkUpdate !== check) {
+            // Checks for update from Forecast.js
             setCheckUpdate(check)
+            // Sends needed background data to App.js of final city value
             sendBackground(responseObj, mainCity)
 
             var type = responseObj.list[mainCity].weather[0].main
@@ -30,7 +32,6 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, chec
             } else if (type === "Snow") {
                 document.getElementById('photo').src = `${snowicon}`
             }
-
             
         }
         if (langSet !== locale) {
@@ -44,20 +45,22 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, chec
         }
     })
 
+    // Updates units
     const getNewUnits = async() => {
         if (units === "metric") {
             var data = await getSpecificForecast()
-            if (data !== null) {
+            if (data !== "") {
                 document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°C"
             }
         } else if (units === "imperial") {
             var data = await getSpecificForecast()
-            if (data !== null) {
+            if (data !== "") {
                 document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°F"
             }
         }
     }
 
+    // Updates description value
     const getLanguage = async() => {
         if (locale === "es" || locale == "fr") {
             var data = await getSpecificForecast()
@@ -69,6 +72,7 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, chec
         }
     }
 
+    // API calls to find the translated description value from a great variety
     const getSpecificForecast = async() => {
 
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/weather?id=${responseObj.list[mainCity].id}&lang=${locale}&units=${units}`, {
@@ -80,8 +84,9 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, chec
             }
         })
 
+        // Checks if API overloaded
         if (res.status === 429) {
-            return "data"
+            return ""
         } else {
             const data = await res.json()
             console.log("getSpecificForecast:")

@@ -13,6 +13,7 @@ const FiveDayConditions = ({ fiveDay, units, locale }) => {
                 var ar = document.getElementById(`fiveDayTemp${i}`).textContent
                 var input = ""
                 console.log(ar)
+                // Way to circumnavigate the moment library default language to allow multiple language
                 if (locale === "fr") {
                     if (ar.includes("Monday") ) {
                         input = ar.replace("Monday", "Lundi")

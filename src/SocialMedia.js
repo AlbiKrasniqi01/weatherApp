@@ -94,15 +94,17 @@
 
 import React, { useState, useEffect } from 'react';
 
-
+// Gets instagram posts and returns
 const SocialMedia = ({ responseObj, mainCity }) => {
 
     const MAXPOSTS = 3
     let [data, setData] = useState([])
     let [gettem, setGettem] = useState(false)
 
+    // Gets posts by tag (5 CALLS PER DAY FROM API KEY)
     const getPosts = async() => {
 
+        // Removes spaces and upper case
         var tagBeforeSpaces = responseObj.list[mainCity].name
         var j = '';
         for (let i = 0; i < tagBeforeSpaces.length; i++) {
@@ -127,6 +129,7 @@ const SocialMedia = ({ responseObj, mainCity }) => {
         console.log(dataIn)
         var dataInput = []
 
+        // Reformats source link to circumnavigate CRO errors.
         if (dataIn.edges.length !== 0) {
             for (var i = 0; i < MAXPOSTS; i++) {
                 dataInput.push(dataIn.edges[i])
