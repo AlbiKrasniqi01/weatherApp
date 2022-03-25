@@ -105,6 +105,7 @@ body {
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   font-size: 24px;
+  overflow-y: scroll;
 }
 
 .tabTitleText {
@@ -169,7 +170,8 @@ body {
   float: right;
   right: 25%;
   margin: 10px;;
-  color: #26c941;
+  color: white;
+  background-color: rgba(242, 235, 235, 0.2);
 }
 
 .instagramCloseBtn {
