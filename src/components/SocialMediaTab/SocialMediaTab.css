@@ -13,6 +13,12 @@
 
 }
 
+.popup-inner {
+    overflow-y: scroll;
+}
+
+
+
 .close-btn {
     position: relative;
     display: inline;

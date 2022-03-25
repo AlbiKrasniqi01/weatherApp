@@ -24,9 +24,12 @@ body {
   height: 30px;
   width: 30px;
   right: 5px;
+  top: 0px;
   position: absolute;
   cursor:pointer;
   padding: 1%;
+  -webkit-filter: drop-shadow(1px 1px 1px #868686);
+  filter: drop-shadow(1px 1px 1px #000000);
 }
 
 .settingsIcon {
@@ -36,6 +39,8 @@ body {
   position: absolute;
   cursor:pointer;
   padding: 1.5%;
+  -webkit-filter: drop-shadow(1px 1px 1px #868686);
+  filter: drop-shadow(1px 1px 1px #000000);
 
 }
 /* ----------------------- */ 
