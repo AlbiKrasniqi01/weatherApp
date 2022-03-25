@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-
+// Gets instagram posts and returns
 const SocialMedia = ({ responseObj, mainCity }) => {
 
     const MAXPOSTS = 3
     let [data, setData] = useState([])
     let [gettem, setGettem] = useState(false)
 
+    // Gets posts by tag (5 CALLS PER DAY FROM API KEY)
     const getPosts = async() => {
 
+        // Removes spaces and upper case
         var tagBeforeSpaces = responseObj.list[mainCity].name
         var j = '';
         for (let i = 0; i < tagBeforeSpaces.length; i++) {
@@ -20,7 +22,11 @@ const SocialMedia = ({ responseObj, mainCity }) => {
             "method": "GET",
             "headers": {
                 'X-RapidAPI-Host': 'InstagramdimashirokovV1.p.rapidapi.com',
-                'X-RapidAPI-Key': '0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794',
+                // 'X-RapidAPI-Key': '0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794'
+                // 'X-RapidAPI-Key': '8ea10601demshe52e0c1fc900b69p10293ejsnde41c0274d78'
+                'X-RapidAPI-Key': 'e462b31e40msh28d7cbc8c38f571p14467ejsne6fc086f6a66'
+
+
             }
         })
 
@@ -29,6 +35,7 @@ const SocialMedia = ({ responseObj, mainCity }) => {
         console.log(dataIn)
         var dataInput = []
 
+        // Reformats source link to circumnavigate CRO errors.
         if (dataIn.edges.length !== 0) {
             for (var i = 0; i < MAXPOSTS; i++) {
                 dataInput.push(dataIn.edges[i])
@@ -61,11 +68,13 @@ const SocialMedia = ({ responseObj, mainCity }) => {
                 {/* <p>Here is whats popping on the gram for {responseObj.list[mainCity].name}</p> */}
                 <p className="postsIntroText" style = {{width: "352px"}}>Top posts from {responseObj.list[mainCity].name}!</p>
                 {gettem === true ?
-                    data.map(post => (
+                    data.map(post => (                
                     <div className='igTopPosts'>
+
                             <ol key={post["node"]["id"]}>
+                                {/* <p className="usernameText">Username: {post["node"]["__typename"]}</p> */}
                                 {/* cros error when uploading images */}
-                                <img id={post["node"]["id"]} src={post["node"]["thumbnail_src"]} width="100" height="100" />
+                                <img id={post["node"]["id"]} src={post["node"]["thumbnail_src"]} width="175" height="175" />
                                 {/* <p>{post["node"]["accessibility_caption"]}</p> */}
                             </ol>            </div>
 

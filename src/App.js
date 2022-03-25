@@ -1,6 +1,7 @@
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
+// Intl used to navigate languages
 import { IntlProvider, FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
@@ -56,6 +57,7 @@ function useWindowSize() {
 //Number generator to randomly select background
 const random_bg = Math.floor((Math.random() * 3) + 1);
 
+// Variable titles by language
 const messages = {
     en: {
         heading:"Forecast",
@@ -74,6 +76,7 @@ const messages = {
     },
 };
 
+// Variables for language setting by language
 const langSettings = [
     [
         "English",
@@ -92,16 +95,18 @@ const langSettings = [
     ]
 ]
 
+// Main App
 function App(props, nextProps) {
 
     const size = useWindowSize()
-    const [locale, setLocale] = useState('en')
-    const [dateTime, setDateTime] = useState('English')
-    const [temp, setTemp] = useState('Celcius')
-    const [buttonPopup, setButtonPopup] = useState(false);
-    const [units, setUnits] = useState('metric')
-    const [langSet, setLangSet] = useState(0);
+    const [locale, setLocale] = useState('en')                //     Local set language
+    const [dateTime, setDateTime] = useState('English')       //     Set the variable for current language setting select menu
+    const [units, setUnits] = useState('metric')              //     Local set temperature metric
+    const [temp, setTemp] = useState('Celcius')               //     Set the variable for metric setting select menu
+    const [buttonPopup, setButtonPopup] = useState(false);    //     Settings option
+    const [langSet, setLangSet] = useState(0);                //     Values to map to select menu
 
+    // Change background by weather type
     function changeBackground(weatherType) {
         if (weatherType === "Clear") {
             if (random_bg === 1) {
@@ -160,6 +165,7 @@ function App(props, nextProps) {
     document.getElementById('App').style.backgroundSize = "cover"
  }
 
+    // Change local language and language select menu
     const langChange = (e) => {
         if (e.target.value === "English" || e.target.value === "Inglesa" || e.target.value === "Anglais"){
             setLocale('en')
@@ -176,6 +182,7 @@ function App(props, nextProps) {
         }
     }
 
+    // Change local units set and current value in metric settings select menu
     const unitsChange = (e) => {
         setTemp(e.target.value)
         if (e.target.value === "Celcius"){
@@ -189,7 +196,6 @@ function App(props, nextProps) {
 
         <div className="body">
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-
 
                 <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
 
@@ -226,7 +232,7 @@ function App(props, nextProps) {
                 <br></br>
 
                 {/* END OF SETTINGS TAB  */}
-
+                {/* Date & Time */}
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <h1 id='dateText'>
                         <FormattedDate value = {props.date} year="numeric" month = "long" day="numeric" weekday="long" />
