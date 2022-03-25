@@ -29,6 +29,8 @@ form #wrapper #tempList {
   padding: 1%;
   position: absolute;
   left: 25%;
+  z-index: 10000;
+
 }
 
 ul {

@@ -8,6 +8,7 @@ import SocialMediaTab from '../../components/SocialMediaTab/SocialMediaTab';
 import './Forecast.css';
 import refreshicon from "../../assets/refreshicon.png";
 
+
 const messages = {
     en: {
         noSearch:"No Cities Searched",

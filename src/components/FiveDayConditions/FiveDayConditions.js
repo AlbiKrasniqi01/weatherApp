@@ -76,14 +76,15 @@ const FiveDayConditions = ({ fiveDay, units, locale }) => {
                 } else if (locale === "en") {
                     if (ar.includes("Lunes")) {
                         input = ar.replace("Monday", "Monday")
+                        input = ar.replace("Lunes", "Monday")
                     } else if (ar.includes("Lundi")) {
                         input = ar.replace("Lundi", "Monday")
                     } else if (ar.includes("Martes")) {
-                        input = ar.replace("", "Tuesday")
+                        input = ar.replace("Martes", "Tuesday")
                     } else if (ar.includes("Mardi")) {
                         input = ar.replace("Mardi", "Tuesday")
                     } else if (ar.includes("Mecredi")) {
-                        input = ar.replace("", "Wednesday")
+                        input = ar.replace("Mecredi", "Wednesday")
                     } else if (ar.includes("Mecredi")) {
                         input = ar.replace("Mecredi", "Wednesday")
                     } else if (ar.includes("Jueves")) {
@@ -102,6 +103,8 @@ const FiveDayConditions = ({ fiveDay, units, locale }) => {
                         input = ar.replace("Domingo", "Sunday")
                     } else if (ar.includes("Dimanche")) {
                         input = ar.replace("Dimanche", "Sunday")
+                    } else if (ar.includes("Miércoles")) {
+                    input = ar.replace("Miércoles", "Wednesday")
                     }
                 }
                 if (input !== "") {

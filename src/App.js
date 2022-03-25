@@ -21,6 +21,7 @@ import cloudy3 from './assets/cloudy3.jpg';
 import snowy1 from './assets/snowy1.jpg';
 import snowy2 from './assets/snowy2.jpg';
 import snowy3 from './assets/snowy3.jpg';
+import refreshicon from './assets/refreshicon.png'; 
 import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
 import SocialMediaTab from './components/SocialMediaTab/SocialMediaTab';
@@ -191,6 +192,7 @@ function App(props, nextProps) {
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
 
 
+                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
                 <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
 
                 {/* /////////////////////////////////// */}
