@@ -1,8 +1,7 @@
-import refreshicon from './assets/refreshicon.png'; // with import
 import './App.css';
 import Forecast from "./components/Forecast/Forecast";
 import React, {useState, useEffect} from "react";
-import {IntlProvider, FormattedDate, FormattedTime, FormattedMessage} from 'react-intl';
+import { IntlProvider, FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import Settings from './components/Settings/Settings';
 import windy1 from './assets/windy1.jpg';
 import windy2 from './assets/windy2.jpg';
@@ -19,6 +18,9 @@ import thunder3 from './assets/thunder3.jpg';
 import cloudy1 from './assets/cloudy1.jpg';
 import cloudy2 from './assets/cloudy2.jpg';
 import cloudy3 from './assets/cloudy3.jpg';
+import snowy1 from './assets/snowy1.jpg';
+import snowy2 from './assets/snowy2.jpg';
+import snowy3 from './assets/snowy3.jpg';
 import settingsIcon from './assets/settingsicon.png';
 import getForecast from './components/Forecast/Forecast';
 import SocialMediaTab from './components/SocialMediaTab/SocialMediaTab';
@@ -90,7 +92,7 @@ const langSettings = [
     ]
 ]
 
-function App(props) {
+function App(props, nextProps) {
 
     const size = useWindowSize()
     const [locale, setLocale] = useState('en')
@@ -119,7 +121,7 @@ function App(props) {
             } else if (random_bg === 3) {
                 document.getElementById('App').style.background = `url(${cloudy3})`
             }
-        } else if (weatherType === "Rain") {
+        } else if (weatherType === "Rain" || weatherType === "Drizzle") {
             if (random_bg === 1) {
                 document.getElementById('App').style.background = `url(${rainy1})`
             } else if (random_bg === 2) {
@@ -127,7 +129,7 @@ function App(props) {
             } else if (random_bg === 3) {
                 document.getElementById('App').style.background = `url(${rainy3})`
             }
-        } else if (weatherType === "Storm") {
+        } else if (weatherType === "Thunderstorm") {
             if (random_bg === 1) {
                 document.getElementById('App').style.background = `url(${thunder1})`
             } else if (random_bg === 2) {
@@ -136,7 +138,27 @@ function App(props) {
                 document.getElementById('App').style.background = `url(${thunder3})`
             }
         }
+
+        else if (weatherType === "Snow") {
+            if (random_bg === 1) {
+                document.getElementById('App').style.background = `url(${snowy1})`
+            } else if (random_bg === 2) {
+                document.getElementById('App').style.background = `url(${snowy2})`
+            } else if (random_bg === 3) {
+                document.getElementById('App').style.background = `url(${snowy3})`
+            }
+        } else{
+            if (random_bg === 1) {
+                document.getElementById('App').style.background = `url(${windy1})`
+            } else if (random_bg === 2) {
+                document.getElementById('App').style.background = `url(${windy2})`
+            } else if (random_bg === 3) {
+                document.getElementById('App').style.background = `url(${windy3})`
+            }
     }
+    document.getElementById('App').style.backgroundRepeat = "no-repeat"
+    document.getElementById('App').style.backgroundSize = "cover"
+ }
 
     const langChange = (e) => {
         if (e.target.value === "English" || e.target.value === "Inglesa" || e.target.value === "Anglais"){
@@ -167,7 +189,8 @@ function App(props) {
 
         <div className="body">
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
-                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+
+
                 <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
 
                 {/* /////////////////////////////////// */}
@@ -213,7 +236,7 @@ function App(props) {
                     </h1>
                 </IntlProvider>
                 {/* Weather fetching component */}
-                <Forecast changeBackground = {changeBackground} locale={locale} units={units}/>
+                <Forecast changeBackground = {changeBackground} locale={locale} units={units} />
             </div>
         </div>
     );

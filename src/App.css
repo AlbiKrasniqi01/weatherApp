@@ -1,4 +1,8 @@
+/* GENERAL STYLING SETTINGS  */
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 #App {
   position: fixed;
   width: 100%;
@@ -12,75 +16,56 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+/* ----------------------- */ 
 
-/* TEMPORARY CSS  */
-.fiveDayText {
-  color: black;
+
+/* HEADER STYLING - Settings/Refresh Icon, Date and Time, Search bar  */
+.refreshIcon {
+  height: 30px;
+  width: 30px;
+  right: 5px;
+  top:0px;
+  position:absolute;
+  cursor:pointer;
+  padding: 1%;
 }
 
-/* Heading CSS  */
-h1 {
+.settingsIcon {
+  height: 26px;
+  width: 26px;
+  left: 3px;
+  position: absolute;
+  cursor:pointer;
+  padding: 1.5%;
 
-  font-size: 56px;
+}
+/* ----------------------- */ 
+
+/* MAIN FORECAST STYLING  */
+#cityName {
+    text-shadow: 1px 1px 3px #000000;
+}
+
+#temperature {
   text-shadow: 1px 1px 3px #000000;
 }
 
-h2 {
-  font-size: 22px;
+#description {
   text-shadow: 1px 1px 3px #000000;
 }
-
-h4 {
-
-  text-shadow: 1px 1px 3px #000000;
-}
-
-
-/* Text formatting styles  */
 
 #dateText {
-  font-size: 21px;
+  font-size: 22px;
   padding: 20px;
   padding-bottom: 0px;
   line-height: 5px;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 #timeText {
   font-size: 18px;
   padding-bottom: 2px;
-}
-
-/* Image and Icon CSS Styling  */
-#photo {
-  height: 70px;
-  width: 70px;
-  -webkit-filter: drop-shadow(1px 1px 3px #000000);
-  filter: drop-shadow(1px 1px 3px #000000);
-}
-
-.refreshIcon {
-  height: 30px;
-  width: 30px;
-  right: 5px;
-  position: absolute;
-  cursor:pointer;
-}
-
-
-.settingsIcon {
-  height: 26px;
-  width: 26px;
-  padding: 3px;
-  left: 3px;
-  position: absolute;
-  cursor:pointer;
-
-}
-
-
-.selectMenu {
-  font-size: 14px;
-  width: 75px;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 .fadeBackground {
@@ -88,22 +73,29 @@ h4 {
   padding: 3px;
   width: 70%;
   margin: auto;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   line-height: 20px;
+  radius:100px;
+  border-radius:8px;
+}
+.selectMenu {
+  font-size: 14px;
+  width: 75px;
+}
+/* ----------------------- */ 
+
+
+/* IMAGE STYLING - GENERAL */
+#photo {
+  height: 70px;
+  width: 70px;
+  -webkit-filter: drop-shadow(1px 1px 3px #000000);
+  filter: drop-shadow(1px 1px 3px #000000);
 }
 
-.fiveBackground {
-  background: #26c941;
-  width: 75%;
-  /* margin: auto; */
-  padding: 5px;
-  padding-bottom: 0px;
-  
-}
+/* ----------------------- */ 
 
-.SocialMedia {
-  overflow:scroll;
-}
+/* BOTTOM TAB STYLING - GENERAL  */
 
 .bottomTab {
   position: absolute;
@@ -111,84 +103,101 @@ h4 {
   height: 30%;
   min-height: 20%;
   bottom: 0px;
-  background-color: hsla(0, 0%, 100%, 0.85);
+  background-color: rgba(255, 255, 255, 0.25);
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   font-size: 24px;
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  overflow-y: scroll;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tabTitleText {
+  font-size: 20px;
+  color: #282c34;
+  display: inline-block;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 50%;
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  max-width: 75vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.tabTitleWords {
+  width: 80%;
+  margin: auto;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
 }
+
+/* ----------------------- */ 
+
+/* BOTTOM TAB - FIVEDAY FORECAST STYLING */
 
 .forecastRow {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #383838;
   width: 85%;
   margin: auto;
-  margin-bottom: 2px;
-  margin-top: 2px;
-  /* margin: 2px; */
+  margin-bottom: 4px;
+  margin-top: 4px;
   padding: 1px;
-}
-
-.dayNameText {
-  padding: 10px;
-  background-color: #3498db;
-}
-
-.temperatureNameText {
-  
+  border: rgb(194, 193, 193) 0.5px;
+  border-style: solid;
 }
 
 .fiveDayTemp {
   display: inline;
   font-size: 18px;
-  text-shadow: 1px 1px 3px #000000;
-  font-weight:bold;
 }
 
-.fiveDayNumerical {
-  font-size: 26px;
+.fiveDayNumTemp {
   display: inline;
-  position: absolute;
-  right: 5px;
+  font-size: 24px;
+  
 }
-.App-link {
-  color: #61dafb;
+/* ----------------------- */ 
+
+/* BOTTOM TAB - SOCIAL MEDIA STYLING  */
+
+.SocialMedia {
+  overflow:scroll;
 }
 
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.postsIntroText {
+  font-size: 15px;
 }
+
+.instagramBtn {
+  float: right;
+  right: 25%;
+  margin: 10px;;
+  color: white;
+  background-color: rgba(242, 235, 235, 0.2);
+  font-size: 18px;
+}
+
+.instagramCloseBtn {
+ float: left;
+ left: 25%;
+ margin: 10px;
+ font-size: 18px;
+}
+
+.usernameText {
+  font-size: 10px;
+}
+
+.igTopPosts {
+  display: inline-block;
+}
+/* ----------------------- */ 
+
+/* LOADING ANIMATION STYLING  */
 
 .loader {
   border: 7px solid #f3f3f3; /* Light grey */
-  border-top: 7px solid #3498db; /* Blue */
+  border-top: 7px solid #8c98a0; /* Blue */
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -201,3 +210,5 @@ h4 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* ----------------------------- */ 

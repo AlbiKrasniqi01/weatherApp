@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Conditions from '../Conditions/Conditions';
-import refreshicon from "../../assets/refreshicon.png";
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import FiveDayForecast from '../../components/FiveDayForecast/FiveDayForecast';
 import FiveDayConditions from "../FiveDayConditions/FiveDayConditions";
 import SocialMedia from '../../SocialMedia'
 import SocialMediaTab from '../../components/SocialMediaTab/SocialMediaTab';
-
-// import './Forecast.css';
+import './Forecast.css';
+import refreshicon from "../../assets/refreshicon.png";
 
 const messages = {
     en: {
@@ -65,19 +64,19 @@ const Forecast = ({ changeBackground, locale, units }) => {
             var data = await getForecast({search})
             if (data.count === 0 ) {
                 setMainCity('')
+                document.getElementById('searchInput').value = ''
             } else {
 
-                setResponseObj(data)
                 var removeIt = document.getElementById('tempList');
 
                 if (removeIt != null) {
                     removeIt.remove()
                 }
-
-                var t = document.createElement('ul');
-                t.setAttribute('id', 'tempList')
-
                 if (data.count > 1) {
+                    setResponseObj(data)
+                    var t = document.createElement('ul');
+                    t.setAttribute('id', 'tempList')
+
                     for (var i = 0; i < (data.count); i++) {
                         var listOptions = document.createElement('li');
                         listOptions.textContent = data.list[i].name + ", " + data.list[i].sys.country;
@@ -86,6 +85,10 @@ const Forecast = ({ changeBackground, locale, units }) => {
                         t.appendChild(listOptions)
                     }
                     document.getElementById('wrapper').appendChild(t)
+                } else if (data.count === 1) {
+                    setCheck(check + 1)
+                    setMainCity('0')
+                    setResponseObj(data)
                 }
             }
         }
@@ -94,40 +97,58 @@ const Forecast = ({ changeBackground, locale, units }) => {
     function clickList(e){
         setMainCity(e.target.id)
         setCheck(check + 1)
-        console.log(check)
 
+        document.getElementById('searchInput').value = ''
         var removeIt = document.getElementById('tempList');
         if (removeIt != null) {
             removeIt.remove()
         }
-
     }
 
     function sendBackground(finalRes, finalCity) {
         changeBackground(finalRes.list[finalCity].weather[0].main)
     }
 
+    const reloadButton = async() => {
+        var ch = document.getElementById('forecast').textContent
+        if ( ch === 'API is overloaded, reload page and try again' || JSON.stringify(responseObj) === '{}' ) {
+            window.location.reload()
+        } else {
+            setResponseObj = await (getForecast())
+        }
+    }
 
 
     const getForecast = async() => {
         //weather data fetch function will go here
         const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=6&units=${units}`, {
+            // const res = await fetch(`https://community-open-weather-map.p.rapidapi.com/find?q=${search}&cnt=5&units=metric`, {
 
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
+                "x-rapidapi-key": "0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794"
             }
         })
 
-        const data = await res.json()
-        console.log("getForecast:")
-        console.log(data)
-        return data
+
+        if (res.status === 429) {
+            setMainCity('');
+            document.getElementById('forecast').textContent = 'API is overloaded, reload page and try again'
+            document.getElementById('searchInput').value = ''
+            const data = {count: 0}
+            return data
+        } else {
+            const data = await res.json()
+            console.log("getForecast:")
+            console.log(data)
+            return data
+        }
     }
 
     return (
         <div>
+            <img className="refreshIcon" onClick={reloadButton} src={refreshicon} alt=""/>
             <div>
                 <form className="searchBar"  onSubmit={onSubmit}>
                     <input type = "text" placeholder='Search Cities' id="searchInput" onChange={(e) => setSearch(e.target.value)} />
@@ -140,16 +161,20 @@ const Forecast = ({ changeBackground, locale, units }) => {
                 </form>
                 <br></br>
                 <div id="forecast">
-                    {mainCity !== '' ? <Conditions responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
+                    {mainCity !== '' ? <Conditions check={check} responseObj={responseObj} mainCity = {mainCity} sendBackground={sendBackground} locale = {locale} units = {units}/> : <div className="loader"></div> }
                 </div>
             </div>
             <div className='bottomTab'>
                 <IntlProvider locale={locale} messages={messages[locale]}>
-                    <h2>
+                    <h2 className='tabTitleText'>
+                    <div className='tabTitleWords'>
                         <FormattedMessage id="heading" defaultMessage="Forecast" value={{locale}}></FormattedMessage>
+                        </div>
                     </h2>
-                    <h2 onClick={() => setButtonPopup(true)}>
+                    <h2 className='tabTitleText' onClick={() => setButtonPopup(true)}>
+                        <div className='tabTitleWords'>
                         <FormattedMessage id="posts" defaultMessage="Posts" value={{locale}}></FormattedMessage>
+                        </div>
                     </h2>
                 </IntlProvider>
                 {/*SOME SORT OF TAB SYSTEM HERE*/}

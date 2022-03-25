@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import { format } from "date-fns";
-
-
+import SimpleDateTime  from 'react-simple-timestamp-to-date';
 
 
 const FiveDayConditions = ({ fiveDay, units, locale }) => {
@@ -115,26 +113,28 @@ const FiveDayConditions = ({ fiveDay, units, locale }) => {
         setLangSet(locale)
     })
 
+
+
     return (
         <div>
                 <div className='forecastRow'>
-                <h4 className = 'fiveDayTemp' id='fiveDayTemp0'> {moment(fiveDay.list[1].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'>{Math.round(fiveDay.list[1].temp.day)}°</a>
+                <h4 className = 'fiveDayTemp' id='fiveDayTemp0'> {moment(fiveDay.list[1].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'><h4 className='fiveDayNumTemp'>{Math.round(fiveDay.list[1].temp.day)}°</h4></a>
                 </div>
 
                 <div className='forecastRow'>
-                    <h4 className = 'fiveDayTemp' id='fiveDayTemp1'>{moment(fiveDay.list[2].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'>{Math.round(fiveDay.list[2].temp.day)}°</a>
+                    <h4 className = 'fiveDayTemp' id='fiveDayTemp1'>{moment(fiveDay.list[2].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'><h4 className='fiveDayNumTemp'>{Math.round(fiveDay.list[2].temp.day)}°</h4></a>
                 </div>
 
                 <div className='forecastRow'>
-                    <h4 className = 'fiveDayTemp' id='fiveDayTemp2'> {moment(fiveDay.list[3].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'>{Math.round(fiveDay.list[3].temp.day)}°</a>
+                    <h4 className = 'fiveDayTemp' id='fiveDayTemp2'> {moment(fiveDay.list[3].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'><h4 className='fiveDayNumTemp'>{Math.round(fiveDay.list[3].temp.day)}°</h4></a>
                 </div>
 
                 <div className='forecastRow'>
-                    <h4 className = 'fiveDayTemp' id='fiveDayTemp3'> {moment(fiveDay.list[4].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'>{Math.round(fiveDay.list[4].temp.day)}°</a>
+                    <h4 className = 'fiveDayTemp' id='fiveDayTemp3'> {moment(fiveDay.list[4].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'><h4 className='fiveDayNumTemp'>{Math.round(fiveDay.list[4].temp.day)}°</h4></a>
                 </div>
 
                 <div className='forecastRow'>
-                    <h4 className = 'fiveDayTemp' id='fiveDayTemp4'> {moment(fiveDay.list[5].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'>{Math.round(fiveDay.list[5].temp.day)}°</a>
+                    <h4 className = 'fiveDayTemp' id='fiveDayTemp4'> {moment(fiveDay.list[5].dt*1000).format('dddd Do')}: </h4><a className='fiveDayTemp'><h4 className='fiveDayNumTemp'>{Math.round(fiveDay.list[5].temp.day)}°</h4></a>
                 </div>
 
         </div>
