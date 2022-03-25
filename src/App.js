@@ -192,7 +192,7 @@ function App(props, nextProps) {
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
 
 
-                <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
+                {/* <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/> */}
                 <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
 
                 {/* /////////////////////////////////// */}
