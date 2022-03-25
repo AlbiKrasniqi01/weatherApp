@@ -5,28 +5,35 @@ import rainyicon from '../../assets/rainyicon.png';
 import windyicon from '../../assets/windyicon.png';
 import snowicon from '../../assets/snowicon.png';
 
-const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) => {
+const Conditions = ({ responseObj, mainCity, sendBackground, locale, units, check }) => {
 
     let [langSet, setLangSet] = useState ('en')
     let [unitsSet, setUnitsSet] = useState ('metric');
+    let [checkUpdate, setCheckUpdate] = useState(0);
 
-    sendBackground(responseObj, mainCity)
+
 
     useEffect(() => {
-        var type = responseObj.list[mainCity].weather[0].main
-        if (type === "Clear") {
-            document.getElementById('photo').src = `${sunnyicon}`
-        } else if (type === "Clouds") {
-            document.getElementById('photo').src = `${cloudyicon}`
-        } else if (type === "Rain") {
-            document.getElementById('photo').src = `${rainyicon}`
-        } else if (type === "Storm") {
-            document.getElementById('photo').src = `${windyicon}`
-        } else if (type === "Snow") {
-            document.getElementById('photo').src = `${snowicon}`
-        }
+        if (checkUpdate !== check) {
+            setCheckUpdate(check)
+            sendBackground(responseObj, mainCity)
 
-        if ( langSet !== locale ) {
+            var type = responseObj.list[mainCity].weather[0].main
+            if (type === "Clear") {
+                document.getElementById('photo').src = `${sunnyicon}`
+            } else if (type === "Clouds") {
+                document.getElementById('photo').src = `${cloudyicon}`
+            } else if (type === "Rain") {
+                document.getElementById('photo').src = `${rainyicon}`
+            } else if (type === "Storm") {
+                document.getElementById('photo').src = `${windyicon}`
+            } else if (type === "Snow") {
+                document.getElementById('photo').src = `${snowicon}`
+            }
+
+            
+        }
+        if (langSet !== locale) {
             setLangSet(locale)
             getLanguage()
         }
@@ -40,20 +47,23 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
     const getNewUnits = async() => {
         if (units === "metric") {
             var data = await getSpecificForecast()
-            document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°C"
+            if (data !== null) {
+                document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°C"
+            }
         } else if (units === "imperial") {
             var data = await getSpecificForecast()
-            document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°F"
+            if (data !== null) {
+                document.getElementById('temperature').textContent = Math.round(data.main.temp) + "°F"
+            }
         }
     }
 
     const getLanguage = async() => {
-        if (locale === "es") {
-            var data = await getSpecificForecast("es")
-            document.getElementById('description').textContent = data.weather[0].description;
-        } else if (locale === "fr") {
-            var data = await getSpecificForecast("fr")
-            document.getElementById('description').textContent = data.weather[0].description;
+        if (locale === "es" || locale == "fr") {
+            var data = await getSpecificForecast()
+            if (data !== "") {
+                document.getElementById('description').textContent = data.weather[0].description;
+            }
         } else if (locale === "en") {
             document.getElementById('description').textContent = responseObj.list[mainCity].weather[0].description
         }
@@ -65,15 +75,20 @@ const Conditions = ({ responseObj, mainCity, sendBackground, locale, units }) =>
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                "x-rapidapi-key": "db316946famshb765cb86ad49608p14213cjsn717f367b3b34"
+                "x-rapidapi-key": "0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794"
 
             }
         })
 
-        const data = await res.json()
-        console.log("getSpecificForecast:")
-        console.log(data)
-        return data
+        if (res.status === 429) {
+            return "data"
+        } else {
+            const data = await res.json()
+            console.log("getSpecificForecast:")
+            console.log(data)
+            return data
+        }
+
     }
 
     return (

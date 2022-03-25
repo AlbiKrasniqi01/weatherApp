@@ -105,9 +105,9 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units, check}) => {
 
     const getNewUnits = async() => {
         if (units === "metric") {
-            var data = await getFiveDayForecast()
+            var data = await getFiveDayForecast(responseObj.list[mainCity].id)
         } else if (units === "imperial") {
-            var data = await getFiveDayForecast()
+            var data = await getFiveDayForecast(responseObj.list[mainCity].id)
         }
     }
 
@@ -116,13 +116,22 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units, check}) => {
             "method": "GET",
             "headers": {
                 'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
-                'X-RapidAPI-Key': 'db316946famshb765cb86ad49608p14213cjsn717f367b3b34'
+                'X-RapidAPI-Key': '0a1494a602msh705260b0e4c166dp1cb901jsn36fcf81fb794'
             }
         })
-        const data = await res.json()
-        console.log("getFiveDayForecast:")
-        console.log(data)
-        setFiveDay(data)
+
+        if (res.status === 429) {
+            setFiveDay('')
+            document.getElementById('five_forecast').textContent = 'API is overloaded'
+            const data = {count: 0}
+            return data
+        } else {
+            const data = await res.json()
+            console.log("getFiveDayForecast:")
+            console.log(data)
+            setFiveDay(data)
+        }
+
     }
 
     return (
@@ -130,7 +139,7 @@ const FiveDayForecast = ({responseObj, mainCity, locale, units, check}) => {
             <div>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                 </IntlProvider>
-                <div className="five_forecast">
+                <div id="five_forecast">
                     {fiveDay !== '' ? <FiveDayConditions fiveDay = {fiveDay} units = {units} locale = {locale} /> : "No cities searched!"}
                 </div>
             </div>

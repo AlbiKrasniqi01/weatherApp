@@ -93,7 +93,7 @@ const langSettings = [
     ]
 ]
 
-function App(props) {
+function App(props, nextProps) {
 
     const size = useWindowSize()
     const [locale, setLocale] = useState('en')
@@ -191,6 +191,7 @@ function App(props) {
         <div className="body">
             <div style={{background: `url(${windy1})`, color:"white" }} id="App">
 
+
                 <img className="refreshIcon" onClick={getForecast} src={refreshicon} alt=""/>
                 <img className='settingsIcon' src={settingsIcon} onClick={() => setButtonPopup(true)}/>
 
@@ -237,7 +238,7 @@ function App(props) {
                     </h1>
                 </IntlProvider>
                 {/* Weather fetching component */}
-                <Forecast changeBackground = {changeBackground} locale={locale} units={units}/>
+                <Forecast changeBackground = {changeBackground} locale={locale} units={units} />
             </div>
         </div>
     );

@@ -41,7 +41,6 @@ body {
   padding: 1.5%;
   -webkit-filter: drop-shadow(1px 1px 1px #868686);
   filter: drop-shadow(1px 1px 1px #000000);
-
 }
 /* ----------------------- */ 
 
@@ -79,6 +78,8 @@ body {
   margin: auto;
   background: rgba(255, 255, 255, 0.5);
   line-height: 20px;
+  radius:100px;
+  border-radius:8px;
 }
 .selectMenu {
   font-size: 14px;
@@ -131,6 +132,10 @@ body {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 14px;
 }
+/* ----------------------- */ 
+
+/* BOTTOM TAB - FIVEDAY FORECAST STYLING */
+
 /* ----------------------- */ 
 
 /* BOTTOM TAB - FIVEDAY FORECAST STYLING */

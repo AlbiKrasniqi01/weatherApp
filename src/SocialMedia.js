@@ -61,6 +61,16 @@ const SocialMedia = ({ responseObj, mainCity }) => {
     return (
             <div className='SocialMedia'>
                 <button className="instagramBtn" onClick={getPosts} >Check Instagram</button>
+// <<<<<<< master
+//                 {/* <p>Here is whats popping on the gram for {responseObj.list[mainCity].name}</p> */}
+//                 <p className="postsIntroText" style = {{width: "352px"}}>Top posts from {responseObj.list[mainCity].name}!</p>
+//                 {gettem === true ?
+//                     data.map(post => (
+//                     <div className='igTopPosts'>
+//                             <ol key={post["node"]["id"]}>
+//                                 {/* cros error when uploading images */}
+//                                 <img id={post["node"]["id"]} src={post["node"]["thumbnail_src"]} width="100" height="100" />
+// =======
                 <p className="postsIntroText" style = {{width: "352px"}}>Top posts from {responseObj.list[mainCity].name}!</p>
                 {gettem === true ?
                     data.map(post => (                

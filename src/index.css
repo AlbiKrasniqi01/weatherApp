@@ -30,6 +30,7 @@ form #wrapper #tempList {
   position: absolute;
   left: 25%;
   z-index: 10000;
+
 }
 
 ul {
@@ -39,8 +40,8 @@ ul {
 }
 
 form .submit-button {
-  padding: 3px;
-  border-radius: 2px;
+  padding: 4px;
+  border-radius: 14px;
   color:white;
   background-color: lightblue;
 }
