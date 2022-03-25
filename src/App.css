@@ -26,15 +26,16 @@ body {
   right: 5px;
   position: absolute;
   cursor:pointer;
+  padding: 1%;
 }
 
 .settingsIcon {
   height: 26px;
   width: 26px;
-  padding: 3px;
   left: 3px;
   position: absolute;
   cursor:pointer;
+  padding: 1.5%;
 
 }
 /* ----------------------- */ 
@@ -58,14 +59,12 @@ body {
   padding-bottom: 0px;
   line-height: 5px;
   text-shadow: 1px 1px 1px #000000;
-
 }
 
 #timeText {
   font-size: 18px;
   padding-bottom: 2px;
   text-shadow: 1px 1px 1px #000000;
-
 }
 
 .fadeBackground {
@@ -73,7 +72,7 @@ body {
   padding: 3px;
   width: 70%;
   margin: auto;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   line-height: 20px;
 }
 .selectMenu {
@@ -101,7 +100,7 @@ body {
   height: 30%;
   min-height: 20%;
   bottom: 0px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   font-size: 24px;
@@ -109,7 +108,6 @@ body {
 }
 
 .tabTitleText {
-  /* background-color: rgba(255, 255, 255, 0.4); */
   font-size: 20px;
   color: #282c34;
   display: inline-block;
@@ -172,13 +170,14 @@ body {
   margin: 10px;;
   color: white;
   background-color: rgba(242, 235, 235, 0.2);
+  font-size: 18px;
 }
 
 .instagramCloseBtn {
  float: left;
  left: 25%;
  margin: 10px;
- font-size: 15px;
+ font-size: 18px;
 }
 
 .usernameText {

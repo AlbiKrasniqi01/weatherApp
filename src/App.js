@@ -156,7 +156,10 @@ function App(props) {
             } else if (random_bg === 3) {
                 document.getElementById('App').style.background = `url(${windy3})`
             }
-    } }
+    }
+    document.getElementById('App').style.backgroundRepeat = "no-repeat"
+    document.getElementById('App').style.backgroundSize = "cover"
+ }
 
     const langChange = (e) => {
         if (e.target.value === "English" || e.target.value === "Inglesa" || e.target.value === "Anglais"){
